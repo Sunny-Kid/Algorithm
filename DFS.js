@@ -1,9 +1,9 @@
 const deepTraverse1 = (node, nodeList = []) => {
-  if (node !== null) {
+  if (node) {
     nodeList.push(node)
-    const childern = node.childern
-    for (let child of childern) {
-      deepTraverse(child, nodeList)
+    const children = node.children
+    for (let child of children) {
+      deepTraverse1(child, nodeList)
     }
   }
   return nodeList
@@ -16,14 +16,14 @@ const deepTraverse2 = node => {
     stack.push(node)
     while (stack.length) {
       const item = stack.pop()
-      const childern = item.childern
+      const children = item.children
       nodes.push(item)
         // node = [] stack = [parent]
         // node = [parent] stack = [child3,child2,child1]
         // node = [parent, child1] stack = [child3,child2,child1-2,child1-1]
         // node = [parent, child1-1] stack = [child3,child2,child1-2]
-      for (let i = childern.length; i >= 0; i--) {
-        stack.push(childern[i])
+      for (let i = children.length; i >= 0; i--) {
+        stack.push(children[i])
       }
     }
   }
