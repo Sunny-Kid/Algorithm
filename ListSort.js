@@ -1,8 +1,20 @@
 /**
  * 什么是堆？
  * 1. 堆是一个完全二叉树
- * 2. 堆树中某节点的值总是不大于或不小于其孩子节点的值
+ * 2. 堆树中某节点的值总是不大于或不小于其他子节点的值
  * 3. 父节点的值总是大于或等于任何一个子节点的值称为最大堆，父节点的值总是小于或等于任何一个子节点的值称为最小堆
+ */
+
+ /**
+ * Definition for ListNode.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int val) {
+ *         this.val = val;
+ *         this.next = null;
+ *     }
+ * }
  */
 
 // JS链表排序
@@ -60,5 +72,33 @@ class Solution {
     left = this.sortList(head);
 
     return this.merge(left, right);
+  }
+}
+
+class Solution2 {
+  sortList (head) {
+    if (head === null || head.next === null) return head
+    let slow = head
+    let fast = head
+    let pre = head
+    while (fast !== null && fast.next !== null) {
+      pre = slow
+      slow = slow.next
+      fast = fast.next.next
+    }
+    pre.next = null
+    return this.merge(this.sortList(head), this.sortList(slow))
+  }
+
+  merge (head1, head2) {
+    if (head1 === null) return head2
+    if (head2 === null) return head1
+    if (head1.val < head2.val) {
+      head1.next = this.merge(head1.next, head2)
+      return head1
+    } else {
+      head2.next = this.merge(head1, head2.next)
+      return head2
+    }
   }
 }
