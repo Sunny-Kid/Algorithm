@@ -31,10 +31,10 @@ class LinkedList {
     if (position > 0  && position <= this.length) {
       const node = new Node(element)
       let previous = null
-      let current = null
+      let current = this.head
       let index = 0
       if (position === 0) {
-        current = this.head
+        this.head = node
       } else {
         while (index++ < this.length) {
           previous = current
