@@ -13,10 +13,11 @@ class LinkedList {
 
   append (element) {
     const node = new Node(element)
-    if (!node.next) {
+    let current = null
+    if (this.head === null) {
       this.head = node
     } else {
-      let current = this.head
+      current = this.head
       while (current.next) {
         current = current.next
       }
