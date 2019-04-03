@@ -32,6 +32,20 @@ function getNum2 (arr, sum) {
   }
 }
 
+function getNum3 (arr, sum) {
+  if (!Array.isArray(arr)) return null
+
+  arr.sort()
+
+  for (let i = 0, j = arr.length - 1;i < j;) {
+    if (arr[i] + arr[j] < sum) i++
+    else if (arr[i] + arr[j] > sum) j--
+    else return [arr[i], arr[j]]
+  }
+
+  return null
+}
+
 function getCombination (arr, num) {
   var r=[];
   (function f(t,a,n)
