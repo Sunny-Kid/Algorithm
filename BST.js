@@ -13,7 +13,7 @@ class Node {
 	}
 }
 
-class BinarySarchTree {
+class BinarySearchTree {
 	constructor () {
 		this.root = null
 	}
@@ -38,7 +38,7 @@ class BinarySarchTree {
 		if (!this.root) {
 			this.root = newNode
 		} else {
-			insertNode(node, newNode)
+			insertNode(this.root, newNode)
 		}
 	}
 }
