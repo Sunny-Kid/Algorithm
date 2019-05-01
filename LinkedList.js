@@ -96,4 +96,37 @@ class LinkedList {
   size () {
     return this.length
   }
+
+  inOrderTraverse(callback) {
+    const inOrderTraverseNode = (node, callback) => {
+      if (node !== null) {
+        inOrderTraverseNode(node.left, callback)
+        callback(node.key)
+        inOrderTraverseNode(node.right, callback)
+      }
+    }
+    inOrderTraverseNode(this.root, callback)
+  }
+
+  preOrderTraverse(callback) {
+    const preOrderTraverseNode = (node, callback) => {
+      if (node !== null) {
+        callback(node.key)
+        preOrderTraverseNode(node.left, callback)
+        preOrderTraverseNode(node.right, callback)
+      }
+    }
+    preOrderTraverseNode(this.root, callback)
+  }
+
+  postOrderTraverse(callback) {
+    const postOrderTraverseNode = (node, callback) => {
+      if (node !== null) {
+        postOrderTraverseNode(node.left, callback)
+        postOrderTraverseNode(node.right, callback)
+        callback(node.key)
+      }
+    }
+    postOrderTraverseNode(this.root, callback)
+  }
 }
