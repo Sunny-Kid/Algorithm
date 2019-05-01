@@ -36,7 +36,7 @@ class LinkedList {
       if (position === 0) {
         this.head = node
       } else {
-        while (index++ < this.length) {
+        while (index++ < position) {
           previous = current
           current = current.next
         }
