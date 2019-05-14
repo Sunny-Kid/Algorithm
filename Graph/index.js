@@ -27,6 +27,51 @@ class Graph {
       }, `${r}\n${v} =>`)
     }, '')
   }
+
+  bfs(v, cb) {
+    const read = []
+    const adjEdge = this.adjEdge
+    const distances = []
+    const predecessors = []
+    const pending = [v || this.vertices[0]]
+
+    const readVertices = (vertices) => {
+      vertices.forEach(vertex => {
+        read.push(vertex)
+        pending.shift()
+        distances[vertex] = distances[vertex] || 0
+        predecessors[vertex] = predecessors[vertex] || null
+        adjEdge.get(vertex).forEach(v => {
+          if (!read.includes(v) && !pending.includes(v)) {
+            pending.push(v)
+            distances[vertex] = distances[v] + 1
+            predecessors[v] = vertex
+          }
+        })
+        if (cb) cb(vertex)
+        if (pending.length) readVertices(pending)
+      })
+    }
+    readVertices(pending)
+
+    return { distances, predecessors }
+  }
+
+  distance(fromV) {
+    const vertices = this.vertices
+    const {  distances, predecessors } = this.bfs(fromV)
+    vertices.forEach(v => {
+      if (!!distances[v]) {
+        let prevV = predecessors[v]
+        let slug = ''
+        if (prevV !== fromV) {
+          prevV = predecessors[prev]
+          slug = `${prevV} - ${slug}`
+        }
+        console.log(slug)
+      }
+    })
+  }
 }
 
 export default Graph
