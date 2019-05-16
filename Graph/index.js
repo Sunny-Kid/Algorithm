@@ -72,6 +72,22 @@ class Graph {
       }
     })
   }
+
+  dfs(cb) {
+    const read = []
+    const adjEdge = this.adjEdge
+    const readVertices = (vertices) => {
+      vertices.forEach(v => {
+        if (read.includes(v)) return false
+        read.push(v)
+        if (cb) cb()
+        if (read.length !== this.vertices.length) {
+          readVertices(adjEdge.get(v))
+        }
+      })
+    }
+    readVertices(this.vertices)
+  }
 }
 
 export default Graph
