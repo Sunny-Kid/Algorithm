@@ -1,3 +1,9 @@
+/**
+ * 快速排序
+ * @param {Array} arr
+ * @returns {Array} arr
+ * O(nlogn)
+ */
 function quickSort (arr) {
   if (arr.length <= 1) {
     return arr
