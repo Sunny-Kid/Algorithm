@@ -1,3 +1,7 @@
+/**
+ * 选择排序
+ * @param {Array} arr
+ */
 function selectionSort(arr) {
 	let indexMin
 	for (let i = 0; i < arr.length; i++) {
@@ -11,4 +15,5 @@ function selectionSort(arr) {
 			[arr[i], arr[indexMin]] = [arr[indexMin], arr[i]]
 		}
 	}
+	return arr
 }

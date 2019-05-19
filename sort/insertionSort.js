@@ -1,3 +1,8 @@
+/**
+ * 插入排序
+ * @param {Array} arr
+ * O(n^2) 
+ */
 function insertionSort(arr) {
 	let j
 	let temp
@@ -11,4 +16,5 @@ function insertionSort(arr) {
 		// 到达索引位置0，插入最小值
 		arr[j] = temp
 	}
+	return arr
 }
