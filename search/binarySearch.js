@@ -1,7 +1,7 @@
 /**
  * 二分搜索
  * @param {Object} item 
- * O(nlogn)
+ * O(logn)
  */
 function binarySearch(item,arr) {
   arr.sort((a, b) => a - b)
