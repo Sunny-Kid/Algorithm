@@ -40,9 +40,9 @@ function threeSum2 (nums, target) {
 
   for (let i = 0; i < nums.length - 1; i++) {
     for (let j = i + 1; j < nums.length; j++) {
-      if (hashMap[j]) {
-        res.push(nums[j]).concat(hashMap[j])
-        hashMap[j] = undefined
+      if (hashMap[nums[j]]) {
+        res.push(nums[j]).concat(hashMap[nums[j]])
+        hashMap[nums[j]] = undefined
       } else {
         let mark = target - nums[i] - nums[j]
         hashMap[mark] = [nums[i], nums[j]]
