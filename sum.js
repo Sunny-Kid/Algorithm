@@ -1,38 +1,59 @@
 /**
- * 题目：从给定的数组中取出三个数，要求和为一个给定的值
+ * 题目：从给定的数组中取出两个数，要求和为一个给定的值
+ * PS：一面为三数之和，答得不好，随后二面面试官降低难度改为两数之和
  */
 
  /**
   * 1.冒泡方法求解
   */
-function getNum (arr, sum) {
+function twoSum (arr, sum) {
   if (!Array.isArray(arr)) return null
-  for (let i = 0;i < arr.length;i++) {
-    if (arr[i] > sum) continue
-    for (let j = 0;j < arr.length;j++) {
-      if (arr[j] > sum) continue
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
       if (arr[i] + arr[j] === sum) return [arr[i], arr[j]]
     }
   }
 }
 
-function getNum2 (arr, sum) {
-  const hashMap = new Map()
-  for (let i = 0;i < arr.length;i++) {
-    if (arr[i] > sum) continue
-    for (let j = 0;j < arr.length;j++) {
-      if (arr[j] > sum) continue
+function twoSum2 (arr, sum) {
+  if (!Array.isArray(arr)) return null
+
+  const hashSet = new Set()
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
       const difference = sum - arr[i] - arr[j]
-      if (hashMap.has(difference)) {
+      if (hashSet.has(difference)) {
         return [arr[i], arr[j], difference]
       }
-      hashMap.set(arr[i], i)
-      hashMap.set(arr[j], j)
+      hashSet.add(arr[i])
+      hashSet.add(arr[j])
     }
   }
 }
 
-function getNum3 (arr, sum) {
+function threeSum2 (nums, target) {
+  if (!Array.isArray(arr)) return null
+
+  const hashMap = {}
+  const res = []
+
+  for (let i = 0; i < nums.length - 1; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (hashMap[j]) {
+        res.push(nums[j]).concat(hashMap[j])
+        hashMap[j] = undefined
+      } else {
+        let mark = target - nums[i] - nums[j]
+        hashMap[mark] = [nums[i], nums[j]]
+      }
+    }
+  } 
+
+  return res
+}
+
+function twoSum3 (arr, sum) {
   if (!Array.isArray(arr)) return null
 
   arr.sort()
