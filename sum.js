@@ -67,6 +67,43 @@ function twoSum3 (arr, sum) {
   return null
 }
 
+function threeSum3 (nums, target) {
+  if (!Array.isArray(nums)) return null
+
+  nums.sort((a, b) => a - b);
+
+  if (nums[0] > target || nums[nums.length - 1] < target) return []
+
+  const res = []
+  const hashMap = {}
+
+  for (let i = 1;i < nums.length - 1;i++) {
+    if (nums[i] === nums[i - 1]) continue
+    let first = i + 1
+    let last = nums.length - 1
+
+    while (first < last) {
+      const middle = []
+      if (nums[first] + nums[last] < target) {
+        first++
+      } else if (nums[first] + nums[last] > target) {
+        last--
+      } else {
+        middle.push([nums[first], middle, nums[last]])
+        if (!hashMap[middle]) { hashMap[middle] = true; res.push(middle) }
+        start += 1
+        last -= 1
+        while(start < end && nums[start] === nums[start - 1]){
+          start += 1;
+        }
+        while(start < end && nums[end] === nums[end + 1]){
+          end -= 1;
+        }
+      }
+    }
+  }
+}
+
 function getCombination (arr, num) {
   var r=[];
   (function f(t,a,n)
