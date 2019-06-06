@@ -91,13 +91,13 @@ function threeSum3 (nums, target) {
       } else {
         middle.push([nums[first], middle, nums[last]])
         if (!hashMap[middle]) { hashMap[middle] = true; res.push(middle) }
-        start += 1
+        first += 1
         last -= 1
-        while(start < end && nums[start] === nums[start - 1]){
-          start += 1;
+        while(first < last && nums[first] === nums[first - 1]){
+          first += 1;
         }
-        while(start < end && nums[end] === nums[end + 1]){
-          end -= 1;
+        while(first < last && nums[last] === nums[last + 1]){
+          last -= 1;
         }
       }
     }
