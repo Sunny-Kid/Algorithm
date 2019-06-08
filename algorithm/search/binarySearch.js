@@ -13,9 +13,9 @@ function binarySearch(item,arr) {
   while (low <= high) {
     mid = Math.floor((high - low) / 2)
     element = arr[mid]
-    if (element < mid) {
+    if (element < item) {
       low = mid + 1
-    } else if (element > mid) {
+    } else if (element > item) {
       high = mid - 1
     } else {
       return mid
