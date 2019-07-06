@@ -89,7 +89,7 @@ function threeSum3 (nums, target) {
       } else if (nums[first] + nums[last] > target) {
         last--
       } else {
-        middle.push([nums[first], middle, nums[last]])
+        middle.push([nums[first], nums[i], nums[last]])
         if (!hashMap[middle]) { hashMap[middle] = true; res.push(middle) }
         first += 1
         last -= 1
@@ -102,6 +102,7 @@ function threeSum3 (nums, target) {
       }
     }
   }
+  return res
 }
 
 function getCombination (arr, num) {
