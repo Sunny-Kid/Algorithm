@@ -27,4 +27,32 @@ N 在[1,200]的范围内。
 如果有M[i][j] = 1，则有M[j][i] = 1。
  */
 
+/**
+ * @param {number[][]} M
+ * @return {number}
+ */
+var findCircleNum = function(M) {
+  const visit = [];
+  const n = M.length;
+  for (let i = 0; i < n; i++){
+    visit.push(false);
+  }
+  
+  const count = 0;
+  for (let i = 0; i < n; i++){
+    if (!visit[i]) {
+      dfs(i, visit, M);
+      count++;
+    }
+  }
+  return count;
+};
 
+const dfs = function(i, visit, M){
+  for (let j = 0; j < visit.length; j++){
+    if (!visit[j] && M[i][j]) {
+      visit[j] = true;
+      dfs(j, visit, M);
+    }
+  }
+}
