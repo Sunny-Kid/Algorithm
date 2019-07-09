@@ -16,12 +16,10 @@ function feibona(n, a = 0, b = 1) {
 
 // 使用循环求斐波那契的第n个值
 function feibona (n) {
-  if (n === 0 || n === 1 || n === 2) return n
-  const res = []
-  res[0] = 1
-  res[1] = 2
-  for (let i = 2;i < n;i++) {
+  // O(n)
+  const res = [0, 1, 2]
+  for (let i = 3;i <= n;i++) {
     res[i] = res[i - 1] + res[i - 2]
   }
-  return res[n - 1]
+  return res[n]
 }
