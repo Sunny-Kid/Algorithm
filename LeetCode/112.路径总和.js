@@ -52,11 +52,11 @@ var hasPathSum2 = function(root, sum) {
     if (!currNode.left && !currNode.right && currSum === 0) {
       return true
     }
-    if (!currNode.left) {
+    if (currNode.left) {
       nodeStack.push(currNode.left)
       sumStack.push(currSum - currNode.left.val)
     }
-    if (!currNode.right) {
+    if (currNode.right) {
       nodeStack.push(currNode.right)
       sumStack.push(currSum - currNode.right.val)
     }
@@ -72,10 +72,10 @@ var pathSum = function(root, sum) {
       res.push(result.concat(node.val))
       return
     }
-    if (!node.left) {
+    if (node.left) {
       dfs([...result, node.val], ressum + node.val, node.left)
     }
-    if (!node.right) {
+    if (node.right) {
       dfs([...result, node.val], ressum + node.val, node.right)
     }
   }
