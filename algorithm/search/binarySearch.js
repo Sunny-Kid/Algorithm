@@ -6,16 +6,12 @@
 function binarySearch(item,arr) {
   arr.sort((a, b) => a - b)
   let low = 0
-  let element = null
-  let mid = null
   let high = arr.length - 1
-
   while (low <= high) {
-    mid = Math.floor((high - low) / 2)
-    element = arr[mid]
-    if (element < item) {
+    const mid = Math.floor((low + high) / 2)
+    if (arr[mid] < item) {
       low = mid + 1
-    } else if (element > item) {
+    } else if (arr[mid] > item) {
       high = mid - 1
     } else {
       return mid
