@@ -17,14 +17,22 @@
  * @param {number[]} nums
  * @return {number}
  */
+// 方法1：使用排序 O(nlogn)
 var majorityElement = function(nums) {
-  if (Array.isArray(nums)) return []
-  if (nums.length === 1) return nums[0]
-  const mid = Math.floor(arr.length / 2)
-  const left = majorityElement(arr.slice(0 , mid))
-  const right = majorityElement(arr.slice(mid, arr.length))
-  if (left === right) return left
-  countOccurences(nums, left) > mid ? left : right
+  nums.sort((a, b) => a - b)
+  return nums[Math.floor(nums.length / 2)]
 };
 
-const countOccurences = (arr, value) => arr.reduce((a, v) => v === value ? a + 1 : a + 0, 0);
+// 方法2：摩尔投票法 O(1)
+var majorityElement = function(nums) {
+  let res = nums[0]
+  let count = 0
+  for (let i = 1;i < nums.length;i++) {
+    if (res === nums[i]) {
+      count++
+    } else {
+      count === 0 ? res = nums[i] : count--
+    }
+  }
+  return res
+};

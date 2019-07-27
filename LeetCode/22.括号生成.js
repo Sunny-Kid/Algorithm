@@ -29,7 +29,7 @@ function generateOneByOne(sublist, res, left, right) {
   if (left > 0) {
     generateOneByOne(sublist + '(', res, left - 1, right)
   }
-  if (right > 0) {
+  if (right > left) {
     generateOneByOne(sublist + ')', res, left, right - 1)
   }
 }
