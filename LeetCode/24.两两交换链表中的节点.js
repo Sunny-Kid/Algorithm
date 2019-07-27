@@ -22,7 +22,7 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var swapPairs1 = function(head) {
+var swapPairs = function(head) {
   if (!head || !head.next) return head
   const next = head.next
   head.next = swapPairs(next.next)
@@ -30,7 +30,7 @@ var swapPairs1 = function(head) {
   return next
 };
 
-var swapPairs2 = function(head) {
+var swapPairs = function(head) {
   const pre = new ListNode(0)
   pre.next = head
   let temp = pre
