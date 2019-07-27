@@ -36,3 +36,42 @@ var majorityElement = function(nums) {
   }
   return res
 };
+
+// 方法3：分治 O(nlogn)
+var majorityElement = function(nums) {
+  function countInRange (nums, num, low, high) {
+    let count = 0
+    for (let i = low;i <= high;i++) {
+      if (nums[i] === num) {
+        count++
+      }
+    }
+    return count
+  }
+
+  function findMajorityElement(nums, low, high) {
+    // base case; the only element in an array of size 1 is the majority
+    // element.
+    if (low === high) {
+      return nums[low];
+    }
+
+    // recurse on left and right halves of this slice.
+    let mid = Math.floor((high + low) / 2);
+    let left = findMajorityElement(nums, low, mid);
+    let right = findMajorityElement(nums, mid + 1, high);
+
+    // if the two halves agree on the majority element, return it.
+    if (left === right) {
+      return left;
+    }
+
+    // otherwise, count each element and return the "winner".
+    const leftCount = countInRange(nums, left, low, high);
+    const rightCount = countInRange(nums, right, low, high);
+
+    return leftCount > rightCount ? left : right;
+  }
+
+  return findMajorityElement(nums, 0, nums.length - 1)
+};
