@@ -36,10 +36,10 @@ var climbStairs = function(n) {
   return res[n]
 };
 
-var climbStairs1 = function(n) {
+var climbStairs = function(n) {
   // O(2^n) 不推荐
   if (n === 0 || n === 1 || n === 2) return n
-  return climbStairs1(n - 1) + climbStairs1(n - 2)
+  return climbStairs(n - 1) + climbStairs(n - 2)
 };
 
 
