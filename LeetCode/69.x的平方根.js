@@ -41,6 +41,7 @@ var mySqrt = function(x) {
 };
 
 var mySqrt = function(x) {
+  if (x === 0 || x === 1) return x
   let r = x
   while (r * r > x) {
     r = parseInt((r + x / r) / 2)
