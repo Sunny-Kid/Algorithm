@@ -51,6 +51,7 @@ var solveSudoku = function(board) {
 
   function isValid(board, row, col, c) {
     for (let i = 0;i < 9;i++) {
+      // 判断所在的行、所在的列、3*3小格子是否有重复元素
       if (board[i][col] !== '.' && board[i][col] === c) return false
       if (board[row][i] !== '.' && board[row][i] === c) return false
       if (board[3 * parseInt(row / 3) + parseInt(i / 3)][3 * parseInt(col / 3) + i % 3] !== '.'
