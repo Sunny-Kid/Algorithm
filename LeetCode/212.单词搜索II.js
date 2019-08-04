@@ -101,7 +101,7 @@ var findWords = function(board, words) {
 
   function dfs(board, visited, str, x, y, trie) {
     if (x < 0 || x >= board.length || y < 0 || y >= board[0].length) return
-    if (visited[x][y] === true) return
+    if (visited[x][y]) return
     str += board[x][y]
     if (!trie.startsWith(str)) return
     if (trie.search(str)) res.push(str)
