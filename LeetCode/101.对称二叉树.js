@@ -40,3 +40,20 @@ function isMirror(t1, t2) {
   if (t1 === null || t2 === null) return false
   return (t1.val === t2.val) && isMirror(t1.right, t2.left) && isMirror(t1.left, t2.right)
 }
+
+var isSymmetric = function(root) {
+  const queue = []
+  queue.push(root)
+  queue.push(root)
+  while (queue.length) {
+    const t1 = queue.shift()
+    const t2 = queue.shift()
+    if (t1 === null && t2 === null) continue
+    if (t1 === null || t2 === null) return false
+    queue.push(t1.left)
+    queue.push(t2.right)
+    queue.push(t1.right)
+    queue.push(t2.left)
+  }
+  return true
+};
