@@ -31,6 +31,7 @@ N 在[1,200]的范围内。
  * @param {number[][]} M
  * @return {number}
  */
+// 方法1：染色
 var findCircleNum = function(M) {
   const visit = [];
   const n = M.length;
@@ -38,7 +39,7 @@ var findCircleNum = function(M) {
     visit.push(false);
   }
   
-  const count = 0;
+  let count = 0;
   for (let i = 0; i < n; i++){
     if (!visit[i]) {
       dfs(i, visit, M);
@@ -56,3 +57,68 @@ const dfs = function(i, visit, M){
     }
   }
 }
+
+// 方法2：并查集
+class UnionFind {
+  constructor(grid) {
+    const m = grid.length
+    const n = grid.length
+    this.count = 0
+    this.parent = new Array(m * n).fill(-1)
+    this.rank = new Array(m * n).fill(0)
+    for (let i = 0;i < m;i++) {
+      for (let j = 0;j < n;j++) {
+        if (grid[i][j] === 1) {
+          this.parent[i * n + j] = i * n + j
+          this.count += 1
+        }
+      }
+    }
+  }
+
+  find(i) {
+    if (this.parent[i] != i) {
+      this.parent[i] = this.find(this.parent[i])
+    }
+    return this.parent[i]
+  }
+
+  union(x, y) {
+    const rootx = this.find(x)
+    const rooty = this.find(y)
+    if (rootx !== rooty) {
+      if (this.rank[rootx] > this.rank[rooty]) {
+        this.parent[rooty] = rootx
+      } else if (this.rank[rootx] < this.rank[rooty]) {
+        this.parent[rootx] = rooty
+      } else {
+        this.parent[rooty] = rootx
+        this.rank[rootx] += 1
+      }
+      this.count -= 1
+    }
+  }
+}
+
+var findCircleNum = function(grid) {
+  if (!grid || !grid[0]) return 0
+  const uf = new UnionFind(grid)
+  const directions = [[0, 1], [0, -1], [-1, 0], [1, 0]]
+  const m = grid.length
+  const n = grid[0].length
+
+  for (let i = 0;i < m;i++) {
+    for (let j = 0;j < n;j++) {
+      if (grid[i][j] === 0) continue
+      for (let d of directions) {
+        const nr = i + d[0]
+        const nc = j + d[1]
+        if (nr >= 0 && nc >=0 && nr < m && nc < n && grid[nr][nc] === 1) {
+          uf.union(i*n + j, nr*n + nc)
+        }
+      }
+    }
+  }
+
+  return uf.count
+};
