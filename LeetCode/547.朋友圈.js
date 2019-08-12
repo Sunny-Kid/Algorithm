@@ -114,7 +114,7 @@ var findCircleNum = function(grid) {
         const nr = i + d[0]
         const nc = j + d[1]
         if (nr >= 0 && nc >=0 && nr < m && nc < n && grid[nr][nc] === 1) {
-          uf.union(i*n + j, nr*n + nc)
+          uf.union(i * n + j, nr * n + nc)
         }
       }
     }
