@@ -1,7 +1,7 @@
 /**
  * 堆排序
  * @param {Array} arr
- * O(nlogn) 
+ * O(nlogn)
  */
 
 // 交换两个节点
