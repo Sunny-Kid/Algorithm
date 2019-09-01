@@ -1,0 +1,9 @@
+{
+  "name": "Algorithm",
+  "version": "1.0.0",
+  "description": "learning algorithm",
+  "main": "index.js",
+  "repository": "git@github.com:Sunny-Kid/Algorithm.git",
+  "author": "Hank Ren",
+  "license": "MIT"
+}

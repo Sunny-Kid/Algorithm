@@ -4,14 +4,13 @@
  * O(n^2) 
  */
 function insertionSort(arr) {
-	let j
 	let key
-	for (let i = 1;i < arr.length;i++) {
-		j = i - 1
+	for (let i = 1; i < arr.length; i++) {
 		key = arr[i]
-		while (j >= 0 && arr[j] > key) {
-			arr[j + 1] = arr[j]
-			j--
+		for (let j = i - 1; j >= 0; j--) {
+			if (arr[j] > key) {
+				arr[j + 1] = arr[j]
+			}
 		}
 		// 到达索引位置，插入最小值
 		arr[j + 1] = key

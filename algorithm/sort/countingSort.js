@@ -8,12 +8,12 @@ function countingSort(Arr) {
   if (!Array.isArray(Arr) || Arr.length < 2) return Arr;
   let res = [];
   // 创建长度max的数组，填充0
-  let counts = new Array(Math.max.apply(this, Arr)).fill(0);
+  let counter = new Array(Math.max.apply(this, Arr)).fill(0);
   for (let i = 0;i < Arr.length;i++) {
-    counts[Arr[i]] += 1;
+    counter[Arr[i]] += 1;
   }
-  for (let j = 0;j < counts.length;j++) {
-    while(counts[j]-- > 0){
+  for (let j = 0;j < counter.length;j++) {
+    while(counter[j]-- > 0){
       res.push(j);
     }
   }
