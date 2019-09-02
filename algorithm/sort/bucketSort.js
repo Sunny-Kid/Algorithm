@@ -6,14 +6,7 @@
  */
 
 import insertionSort from './insertionSort';
-
-function findMinValue(array) {
-  return Math.min.apply(this, array);
-}
-
-function findMaxValue(array) {
-  return Math.max.apply(this, array);
-}
+import { findMaxValue, findMinValue } from './utils';
 
 function createBuckets(array, bucketSize) {
   const minValue = findMinValue(array);
