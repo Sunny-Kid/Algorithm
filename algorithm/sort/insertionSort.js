@@ -7,13 +7,13 @@ export default function insertionSort(arr) {
 	let key
 	for (let i = 1; i < arr.length; i++) {
 		key = arr[i]
-		for (let j = i - 1; j >= 0; j--) {
+		for (let j = i; j >= 0; j--) {
 			if (arr[j] > key) {
-				arr[j + 1] = arr[j]
+				arr[j] = arr[j - 1]
 			}
 		}
 		// 到达索引位置，插入最小值
-		arr[j + 1] = key
+		arr[j] = key
 	}
 	return arr
 }
