@@ -3,7 +3,7 @@
  * @param {Array} arr
  * O(n^2) 
  */
-function insertionSort(arr) {
+export default function insertionSort(arr) {
 	let key
 	for (let i = 1; i < arr.length; i++) {
 		key = arr[i]
