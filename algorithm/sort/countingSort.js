@@ -1,23 +1,29 @@
 /**
  * 计数排序
  * @param {Array} arr
- * O(n + k)
+ * O(n + k) k 为计数器的长度
  */
 
-function countingSort(Arr) {
-  if (!Array.isArray(Arr) || Arr.length < 2) return Arr;
-  let res = [];
+function findMaxValue(arr) {
+  return Math.max.apply(this, arr);
+}
+
+function countingSort(arr) {
+  if (!Array.isArray(arr) || arr.length < 2) return arr;
   // 创建长度max的数组，填充0
-  let counter = new Array(Math.max.apply(this, Arr)).fill(0);
-  for (let i = 0;i < Arr.length;i++) {
-    counter[Arr[i]] += 1;
+  const maxValue = findMaxValue(arr);
+  const counts = new Array(maxValue + 1).fill(0);
+  for (let i = 0;i < arr.length;i++) {
+    counts[arr[i]]++;
   }
-  for (let j = 0;j < counter.length;j++) {
-    while(counter[j]-- > 0){
-      res.push(j);
+  let sortedIndex = 0;
+  counts.forEach((count, index) => {
+    while (count > 0) {
+      arr[sortedIndex++] = index;
+      count--;
     }
-  }
-  return res;
+  })
+  return arr;
 }
 
 let arr = [2, 2, 3, 8, 7, 1, 2, 2, 2, 7, 3, 9, 8, 2, 1, 4, 2, 4, 6, 9, 2];
