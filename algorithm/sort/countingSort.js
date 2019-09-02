@@ -8,7 +8,7 @@ function findMaxValue(arr) {
   return Math.max.apply(this, arr);
 }
 
-function countingSort(arr) {
+export default function countingSort(arr) {
   if (!Array.isArray(arr) || arr.length < 2) return arr;
   // 创建长度max的数组，填充0
   const maxValue = findMaxValue(arr);
