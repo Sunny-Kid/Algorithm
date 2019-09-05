@@ -3,7 +3,9 @@
  * @param {Array} arr
  * O(n^2)
  */
-function selectionSort(arr) {
+import { swap } from './utils';
+
+export default function selectionSort(arr) {
 	let indexMin
 	for (let i = 0; i < arr.length - 1; i++) {
 		indexMin = i
@@ -13,7 +15,7 @@ function selectionSort(arr) {
 			}
 		}
 		if (i !== indexMin) {
-			[arr[i], arr[indexMin]] = [arr[indexMin], arr[i]]
+			swap(arr, i, indexMin)
 		}
 	}
 	return arr

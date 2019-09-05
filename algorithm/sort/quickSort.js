@@ -4,20 +4,43 @@
  * @returns {Array} arr
  * O(nlogn)
  */
-function quickSort (arr) {
-  if (arr.length <= 1) {
-    return arr
-  }
-  const pivotIndex = Math.floor(arr.length / 2)
-  const pivot = arr.splice(pivotIndex, 1)[0]
-  const left = []
-  const right = []
-  for (let i = 0;i < arr.length;i++) {
-    if (arr[i] < pivot) {
-      left.push(arr[i])
-    } else {
-      right.push(arr[i])
+import { swap } from './utils';
+
+export default function quickSort (arr) {
+  return quick(arr, 0, arr.length - 1);
+}
+
+function quick(arr, left, right) {
+  let index;
+  if (arr.length > 1) {
+    index = partition(arr, left, right);
+    if (left < index - 1) {
+      quick(arr, left, index - 1);
+    }
+    if (index < right) {
+      quick(arr, index, right);
     }
   }
-  return quickSort(left).concat(pivot, quickSort(right))
+  return arr;
+}
+
+function partition(array, left, right) {
+  const pivot = array[Math.floor((right + left) / 2)];
+  let i = left;
+  let j = right;
+
+  while (i <= j) {
+    while (array[i] < pivot) {
+      i++;
+    }
+    while (array[j] > pivot) {
+      j--;
+    }
+    if (i <= j) {
+      swap(array, i, j);
+      i++;
+      j--;
+    }
+  }
+  return i;
 }
