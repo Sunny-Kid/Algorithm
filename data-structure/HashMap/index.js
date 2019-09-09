@@ -11,7 +11,7 @@ class ValuePair {
   }
 }
 
-export default class HashTable {
+export default class HashMap {
   constructor(toStrFn = defaultToString) {
     this.toStrFn = toStrFn;
     this.table = {};
