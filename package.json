@@ -1,13 +1,20 @@
 {
-  "name": "Algorithm",
+  "name": "algorithm",
   "version": "1.0.0",
   "description": "learning algorithm",
-  "repository": "git@github.com:Sunny-Kid/Algorithm.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sunny-Kid/Algorithm.git"
+  },
+  "scripts": {
+    "lint:fix": "eslint src --fix"
+  },
   "author": "Hank Ren",
   "license": "MIT",
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
   },
   "commitlint": {
@@ -15,9 +22,19 @@
       "@commitlint/config-angular"
     ]
   },
+  "lint-staged": {
+    "src/**/*.js": "eslint --max-warnings=1 --ignore-pattern !.umirc.js"
+  },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
-    "husky": "^3.0.5"
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2"
   }
 }

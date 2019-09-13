@@ -17,8 +17,8 @@ class MinCoinChange1 {
 				debugger
 				newMin = this.makeChange(newAmount)
 			}
-			if (newAmount >= 0 && 
-				(newMin.length < min.length - 1 || !min.length) && 
+			if (newAmount >= 0 &&
+				(newMin.length < min.length - 1 || !min.length) &&
 				(newMin.length || !newAmount)) {
 				min = [coin].concat(newMin)
 			}
@@ -39,7 +39,7 @@ class MinCoinChange2 {
 		const change = []
 		let total = 0
 		this.coins.sort((a, b) => a - b < 0).forEach(coin => {
-			while(total + coin <= amount) {
+			while (total + coin <= amount) {
 				change.push(coin)
 				total += coin
 			}

@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "prettier",
+    "import"
+  ],
+  "env": {
+    "jquery": true
+  },
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ]
+  }
+}
