@@ -4,7 +4,7 @@
  * O(n + k) k 为计数器的长度
  */
 
-import { findMaxValue } from "./utils";
+import { findMaxValue } from './utils';
 
 export default function countingSort(arr) {
   if (!Array.isArray(arr) || arr.length < 2) return arr;

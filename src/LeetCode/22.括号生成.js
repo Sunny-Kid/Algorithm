@@ -18,7 +18,7 @@
  */
 var generateParenthesis = function(n) {
   const res = [];
-  generateOneByOne("", res, n, n);
+  generateOneByOne('', res, n, n);
   return res;
 };
 
@@ -27,9 +27,9 @@ function generateOneByOne(sublist, res, left, right) {
     res.push(sublist);
   }
   if (left > 0) {
-    generateOneByOne(sublist + "(", res, left - 1, right);
+    generateOneByOne(sublist + '(', res, left - 1, right);
   }
   if (right > left) {
-    generateOneByOne(sublist + ")", res, left, right - 1);
+    generateOneByOne(sublist + ')', res, left, right - 1);
   }
 }

@@ -3,7 +3,7 @@
  * @param {Array} arr
  * O(nlogn)
  */
-import { swap } from "./utils";
+import { swap } from './utils';
 
 // 最大堆调整（Max Heapify）：将堆的末端子节点作调整，使得子节点永远小于父节点
 function maxHeapify(arr, start, end) {

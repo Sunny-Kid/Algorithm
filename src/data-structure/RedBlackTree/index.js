@@ -1,10 +1,10 @@
-import BinarySearchTree from "../BinarySearchTree";
-import { Node } from "../BinarySearchTree/models/node";
-import { defaultCompare, COMPARE } from "../util/index";
+import BinarySearchTree from '../BinarySearchTree';
+import { Node } from '../BinarySearchTree/models/node';
+import { defaultCompare, COMPARE } from '../util/index';
 
 const Colors = {
-  BLACK: "black",
-  RED: "red"
+  BLACK: 'black',
+  RED: 'red',
 };
 export default class RedBlackTree extends BinarySearchTree {
   constructor(compareFn = defaultCompare) {

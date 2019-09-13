@@ -4,7 +4,7 @@
  * @returns {Array} arr
  * O(nlogn)
  */
-import { swap } from "./utils";
+import { swap } from './utils';
 
 export default function quickSort(arr) {
   return quick(arr, 0, arr.length - 1);

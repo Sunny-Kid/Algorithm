@@ -34,7 +34,7 @@ TrieNode.prototype.has = function(val) {
 };
 
 var Trie = function() {
-  this.root = new TrieNode("");
+  this.root = new TrieNode('');
 };
 
 Trie.prototype.insert = function(word) {

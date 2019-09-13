@@ -6,7 +6,7 @@
  * @param  maxDigit 最大位数
  */
 //LSD Radix Sort
-import { findMinValue, findMaxValue } from "./utils";
+import { findMinValue, findMaxValue } from './utils';
 
 function radixSort(array, radixBase = 10) {
   if (array.length < 2) {

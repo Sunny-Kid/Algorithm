@@ -5,8 +5,8 @@
  * 桶排序适合在海量数据中应用，桶排序对数据的条件有特殊要求，有其局限性，适合元素值集合并不大的情况。
  */
 
-import insertionSort from "./insertionSort";
-import { findMaxValue, findMinValue } from "./utils";
+import insertionSort from './insertionSort';
+import { findMaxValue, findMinValue } from './utils';
 
 function createBuckets(array, bucketSize) {
   const minValue = findMinValue(array);

@@ -1,8 +1,8 @@
 /**
  * BST - 二叉搜索树数据结构的实现
  */
-import { Node } from "./models/node";
-import { defaultCompare, COMPARE } from "../util/index";
+import { Node } from './models/node';
+import { defaultCompare, COMPARE } from '../util/index';
 
 export default class BinarySearchTree {
   constructor(compareFn = defaultCompare) {

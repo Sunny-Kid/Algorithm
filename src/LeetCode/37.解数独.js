@@ -30,7 +30,7 @@ var solveSudoku = function(board) {
   function solve(board) {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[0].length; j++) {
-        if (board[i][j] === ".") {
+        if (board[i][j] === '.') {
           for (let c = 1; c <= 9; c++) {
             const strC = c.toString();
             if (isValid(board, i, j, strC)) {
@@ -38,7 +38,7 @@ var solveSudoku = function(board) {
               if (solve(board)) {
                 return true;
               } else {
-                board[i][j] = ".";
+                board[i][j] = '.';
               }
             }
           }
@@ -52,12 +52,12 @@ var solveSudoku = function(board) {
   function isValid(board, row, col, c) {
     for (let i = 0; i < 9; i++) {
       // 判断所在的行、所在的列、3*3小格子是否有重复元素
-      if (board[i][col] !== "." && board[i][col] === c) return false;
-      if (board[row][i] !== "." && board[row][i] === c) return false;
+      if (board[i][col] !== '.' && board[i][col] === c) return false;
+      if (board[row][i] !== '.' && board[row][i] === c) return false;
       if (
         board[3 * parseInt(row / 3) + parseInt(i / 3)][
           3 * parseInt(col / 3) + (i % 3)
-        ] !== "." &&
+        ] !== '.' &&
         board[3 * parseInt(row / 3) + parseInt(i / 3)][
           3 * parseInt(col / 3) + (i % 3)
         ] === c

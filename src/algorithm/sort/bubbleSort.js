@@ -3,7 +3,7 @@
  * @param {Array} arr
  * O(n^2)
  */
-import { swap } from "./utils";
+import { swap } from './utils';
 
 export default function bubbleSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {

@@ -1,4 +1,4 @@
-import Dictionary from "../Dictionary";
+import Dictionary from '../Dictionary';
 
 class Graph {
   constructor() {
@@ -24,7 +24,7 @@ class Graph {
       return this.adjEdge.get(v).reduce((r, e, i) => {
         return r + e;
       }, `${r}\n${v} =>`);
-    }, "");
+    }, '');
   }
 
   bfs(v, cb) {
@@ -62,7 +62,7 @@ class Graph {
     vertices.forEach(v => {
       if (!!distances[v]) {
         let prevV = predecessors[v];
-        let slug = "";
+        let slug = '';
         if (prevV !== fromV) {
           prevV = predecessors[prev];
           slug = `${prevV} - ${slug}`;

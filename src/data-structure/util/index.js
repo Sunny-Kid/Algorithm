@@ -1,7 +1,7 @@
 export const COMPARE = {
   LESS_THAN: -1,
   EQUAL: 0,
-  BIGGER_THAN: 1
+  BIGGER_THAN: 1,
 };
 
 export function defaultCompare(a, b) {
@@ -11,10 +11,10 @@ export function defaultCompare(a, b) {
 
 export function defaultToString(item) {
   if (item === null) {
-    return "NULL";
+    return 'NULL';
   } else if (item === undefined) {
-    return "UNDEFINED";
-  } else if (typeof item === "string" || item instanceof String) {
+    return 'UNDEFINED';
+  } else if (typeof item === 'string' || item instanceof String) {
     return `${item}`;
   }
   return item.toString();

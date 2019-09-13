@@ -15,7 +15,7 @@ class Trie {
   }
 
   insert(stringData, node) {
-    if (stringData === "") return;
+    if (stringData === '') return;
     let children = node.children;
     let haveData = null;
     for (let child of children) {
@@ -46,7 +46,7 @@ class Trie {
   }
 
   search(queryData) {
-    if (queryData === "" || this.root.children.length === 0) {
+    if (queryData === '' || this.root.children.length === 0) {
       return false;
     }
     for (let child of this.root.children) {

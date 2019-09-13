@@ -36,7 +36,7 @@ var solveNQueens = function(n) {
   let pie = new Set();
   // na: 次对角线
   let na = new Set();
-  const queens = ".".repeat(n).split("");
+  const queens = '.'.repeat(n).split('');
   DFS(n, 0, []);
 
   function DFS(n, row, curState) {
@@ -63,8 +63,8 @@ var solveNQueens = function(n) {
   return result.map(val => {
     return val.map(item => {
       let q = [...queens];
-      q.splice(item, 1, "Q");
-      return q.join("");
+      q.splice(item, 1, 'Q');
+      return q.join('');
     });
   });
 };

@@ -1,4 +1,4 @@
-import { defaultToString } from "../util";
+import { defaultToString } from '../util';
 
 class ValuePair {
   constructor(key, value) {
@@ -18,7 +18,7 @@ export default class HashMap {
   }
 
   loseloseHashCode(key) {
-    if (typeof key === "number") {
+    if (typeof key === 'number') {
       return key;
     }
     const tableKey = this.toStrFn(key);

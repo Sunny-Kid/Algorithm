@@ -45,7 +45,7 @@ TrieNode.prototype.has = function(val) {
 };
 
 var Trie = function() {
-  this.root = new TrieNode("");
+  this.root = new TrieNode('');
 };
 
 Trie.prototype.insert = function(word) {
@@ -95,7 +95,7 @@ var findWords = function(board, words) {
   let visited = [...new Array(m)].fill([]);
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      dfs(board, visited, "", i, j, trie);
+      dfs(board, visited, '', i, j, trie);
     }
   }
 

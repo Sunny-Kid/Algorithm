@@ -3,7 +3,7 @@
  * @param {Array} arr
  * O(n^2)
  */
-import { swap } from "./utils";
+import { swap } from './utils';
 
 export default function selectionSort(arr) {
   let indexMin;

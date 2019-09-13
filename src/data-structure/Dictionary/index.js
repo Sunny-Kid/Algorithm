@@ -1,4 +1,4 @@
-import { defaultToString } from "../util";
+import { defaultToString } from '../util';
 
 class ValuePair {
   constructor(key, value) {
@@ -85,7 +85,7 @@ class Dictionary {
 
   toString() {
     if (this.isEmpty()) {
-      return "";
+      return '';
     }
     const valuePairs = this.keyValues();
     let objString = `${valuePairs[0].toString()}`;
