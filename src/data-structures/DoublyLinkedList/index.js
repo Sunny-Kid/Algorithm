@@ -1,5 +1,4 @@
 import { Node, LinkedList } from '../LinkedList';
-import { noop } from 'rxjs';
 
 class DoublyNode extends Node {
   constructor(element, next, prev) {
