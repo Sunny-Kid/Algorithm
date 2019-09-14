@@ -3,121 +3,121 @@
  * PS：一面为三数之和，答得不好，随后二面面试官降低难度改为两数之和
  */
 
- /**
-  * 1.冒泡方法求解
-  */
-function twoSum (arr, sum) {
-  if (!Array.isArray(arr)) return null
+/**
+ * 1.冒泡方法求解
+ */
+function twoSum(arr, sum) {
+  if (!Array.isArray(arr)) return null;
 
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] + arr[j] === sum) return [arr[i], arr[j]]
+      if (arr[i] + arr[j] === sum) return [arr[i], arr[j]];
     }
   }
 }
 
-function twoSum2 (arr, sum) {
-  if (!Array.isArray(arr)) return null
+function twoSum2(arr, sum) {
+  if (!Array.isArray(arr)) return null;
 
-  const hashSet = new Set()
+  const hashSet = new Set();
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = i + 1; j < arr.length; j++) {
-      const difference = sum - arr[i] - arr[j]
+      const difference = sum - arr[i] - arr[j];
       if (hashSet.has(difference)) {
-        return [arr[i], arr[j], difference]
+        return [arr[i], arr[j], difference];
       }
-      hashSet.add(arr[i])
-      hashSet.add(arr[j])
+      hashSet.add(arr[i]);
+      hashSet.add(arr[j]);
     }
   }
 }
 
-function threeSum2 (nums, target) {
-  if (!Array.isArray(arr)) return null
+function threeSum2(nums, target) {
+  if (!Array.isArray(arr)) return null;
 
-  const hashMap = {}
-  const res = []
+  const hashMap = {};
+  const res = [];
 
   for (let i = 0; i < nums.length - 1; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       if (hashMap[nums[j]]) {
-        res.push(nums[j]).concat(hashMap[nums[j]])
-        hashMap[nums[j]] = undefined
+        res.push(nums[j]).concat(hashMap[nums[j]]);
+        hashMap[nums[j]] = undefined;
       } else {
-        let mark = target - nums[i] - nums[j]
-        hashMap[mark] = [nums[i], nums[j]]
+        let mark = target - nums[i] - nums[j];
+        hashMap[mark] = [nums[i], nums[j]];
       }
     }
-  } 
-
-  return res
-}
-
-function twoSum3 (arr, sum) {
-  if (!Array.isArray(arr)) return null
-
-  arr.sort()
-
-  for (let i = 0, j = arr.length - 1;i < j;) {
-    if (arr[i] + arr[j] < sum) i++
-    else if (arr[i] + arr[j] > sum) j--
-    else return [arr[i], arr[j]]
   }
 
-  return null
+  return res;
 }
 
-function threeSum3 (nums, target) {
-  if (!Array.isArray(nums)) return null
+function twoSum3(arr, sum) {
+  if (!Array.isArray(arr)) return null;
+
+  arr.sort();
+
+  for (let i = 0, j = arr.length - 1; i < j; ) {
+    if (arr[i] + arr[j] < sum) i++;
+    else if (arr[i] + arr[j] > sum) j--;
+    else return [arr[i], arr[j]];
+  }
+
+  return null;
+}
+
+function threeSum3(nums, target) {
+  if (!Array.isArray(nums)) return null;
 
   nums.sort((a, b) => a - b);
 
-  if (nums[0] > target || nums[nums.length - 1] < target) return []
+  if (nums[0] > target || nums[nums.length - 1] < target) return [];
 
-  const res = []
-  const hashMap = {}
+  const res = [];
+  const hashMap = {};
 
-  for (let i = 1;i < nums.length - 1;i++) {
-    if (nums[i] === nums[i - 1]) continue
-    let first = i + 1
-    let last = nums.length - 1
+  for (let i = 1; i < nums.length - 1; i++) {
+    if (nums[i] === nums[i - 1]) continue;
+    let first = i + 1;
+    let last = nums.length - 1;
 
     while (first < last) {
-      const middle = []
+      const middle = [];
       if (nums[first] + nums[last] < target) {
-        first++
+        first++;
       } else if (nums[first] + nums[last] > target) {
-        last--
+        last--;
       } else {
-        middle.push([nums[first], nums[i], nums[last]])
-        if (!hashMap[middle]) { hashMap[middle] = true; res.push(middle) }
-        first += 1
-        last -= 1
-        while(first < last && nums[first] === nums[first - 1]){
+        middle.push([nums[first], nums[i], nums[last]]);
+        if (!hashMap[middle]) {
+          hashMap[middle] = true;
+          res.push(middle);
+        }
+        first += 1;
+        last -= 1;
+        while (first < last && nums[first] === nums[first - 1]) {
           first += 1;
         }
-        while(first < last && nums[last] === nums[last + 1]){
+        while (first < last && nums[last] === nums[last + 1]) {
           last -= 1;
         }
       }
     }
   }
-  return res
+  return res;
 }
 
-function getCombination (arr, num) {
-  var r=[];
-  (function f(t,a,n)
-  {
-      if (n==0)
-      {
-          return r.push(t);
-      }
-      for (var i=0,l=a.length; i<=l-n; i++)
-      {
-          f(t.concat(a[i]), a.slice(i+1), n-1);
-      }
-  })([],arr,num);
+function getCombination(arr, num) {
+  var r = [];
+  (function f(t, a, n) {
+    if (n == 0) {
+      return r.push(t);
+    }
+    for (var i = 0, l = a.length; i <= l - n; i++) {
+      f(t.concat(a[i]), a.slice(i + 1), n - 1);
+    }
+  })([], arr, num);
   return r;
 }
 
@@ -125,7 +125,7 @@ function getCombination (arr, num) {
  * 题目：从一个无序，不相等的数组中，选取N个数，使其和为M实现算法
  */
 
-function getCombBySum(array,sum,tolerance,targetCount){
+function getCombBySum(array, sum, tolerance, targetCount) {
   var util = {
     /*
       get combination from array
@@ -142,18 +142,15 @@ function getCombBySum(array,sum,tolerance,targetCount){
     这是使用了循环加递归做出了组合排序
     */
     getCombination: function(arr, num) {
-      var r=[];
-      (function f(t,a,n)
-      {
-          if (n==0)
-          {
-              return r.push(t);
-          }
-          for (var i=0,l=a.length; i<=l-n; i++)
-          {
-              f(t.concat(a[i]), a.slice(i+1), n-1);
-          }
-      })([],arr,num);
+      var r = [];
+      (function f(t, a, n) {
+        if (n == 0) {
+          return r.push(t);
+        }
+        for (var i = 0, l = a.length; i <= l - n; i++) {
+          f(t.concat(a[i]), a.slice(i + 1), n - 1);
+        }
+      })([], arr, num);
       return r;
     },
 
@@ -162,133 +159,138 @@ function getCombBySum(array,sum,tolerance,targetCount){
     getArrayIndex: function(array) {
       var i = 0,
         r = [];
-      for(i = 0;i<array.length;i++){
+      for (i = 0; i < array.length; i++) {
         r.push(i);
       }
       return r;
-    }
-  }
-  
+    },
+  };
+
   var logic = {
     // sort the array,then get what's we need
     //  获取数组中比sum小的数
-    init: function(array,sum) {
+    init: function(array, sum) {
       // clone array
       var _array = array.concat(),
-      r = [],
-      i = 0;
+        r = [],
+        i = 0;
       // sort by asc
-      _array.sort(function(a,b){
+      _array.sort(function(a, b) {
         return a - b;
       });
       // get all number when it's less than or equal sum
-      for (i = 0;i<_array.length;i++) {
+      for (i = 0; i < _array.length; i++) {
         if (_array[i] <= sum) {
           r.push(_array[i]);
         } else {
           break;
         }
       }
-      
+
       return r;
     },
     // important function
-    core: function(array,sum,arrayIndex,count,r){
+    core: function(array, sum, arrayIndex, count, r) {
       var i = 0,
         k = 0,
         combArray = [],
         _sum = 0,
         _cca = [],
         _cache = [];
-      
-      if(count == _returnMark){
+
+      if (count == _returnMark) {
         return;
       }
       // get current count combination
       // 这里排序的不是原来的数组,而是求的索引后的数组
-      combArray = util.getCombination(arrayIndex,count);
-      for(i = 0;i < combArray.length;i++){
+      combArray = util.getCombination(arrayIndex, count);
+      for (i = 0; i < combArray.length; i++) {
         _cca = combArray[i];
         _sum = 0;
         _cache = [];
         // calculate the sum from combination
-        for(k = 0;k < _cca.length;k++){
+        for (k = 0; k < _cca.length; k++) {
           _sum += array[_cca[k]];
           _cache.push(array[_cca[k]]);
         }
-        if(Math.abs(_sum-sum) <= _tolerance){
+        if (Math.abs(_sum - sum) <= _tolerance) {
           r.push(_cache);
-        }      
+        }
       }
-      logic.core(array, sum, arrayIndex, count-1, r);
-    }
-  }
+      logic.core(array, sum, arrayIndex, count - 1, r);
+    },
+  };
 
   var r = [],
     _array = [],
     _targetCount = 0,
     _tolerance = 0,
     _returnMark = 0;
-  
+
   // check data
   _targetCount = targetCount || _targetCount;
   _tolerance = tolerance || _tolerance;
-  
+
   _array = logic.init(array, sum);
   if (_targetCount) {
-    _returnMark = _targetCount-1;
+    _returnMark = _targetCount - 1;
   }
-  
-  logic.core(_array,sum,util.getArrayIndex(_array),(_targetCount || _array.length),r);
-  
+
+  logic.core(
+    _array,
+    sum,
+    util.getArrayIndex(_array),
+    _targetCount || _array.length,
+    r
+  );
+
   return r;
 }
 
-function getNumByCount (arr, sum, count) {
+function getNumByCount(arr, sum, count) {
   const util = {
-    getCombination: function (arr, num) {
-      let result = []
-      (function f(t , a, n) {
+    getCombination: function(arr, num) {
+      let result = [](function f(t, a, n) {
         if (n === 0) {
-          return result.push(t)
+          return result.push(t);
         }
-        for (let i = 0;i <= a.length - n;i++) {
-          f(t.concat(a[i]), a.slice(i + 1), n - 1)
+        for (let i = 0; i <= a.length - n; i++) {
+          f(t.concat(a[i]), a.slice(i + 1), n - 1);
         }
-      })([], arr, num)
-      return result
-    }
-  }
+      })([], arr, num);
+      return result;
+    },
+  };
 
   const logic = {
-    init: function (array, sum) {
-      return array.filter(item => item <= sum)
+    init: function(array, sum) {
+      return array.filter(item => item <= sum);
     },
 
-    core: function (array, sum, count, r) {
-      if (count === 0) return r
-      let combArray = util.getCombination(array,count);
-      for (let i = 0;i < combArray.length;i++) {
+    core: function(array, sum, count, r) {
+      if (count === 0) return r;
+      let combArray = util.getCombination(array, count);
+      for (let i = 0; i < combArray.length; i++) {
         _cca = combArray[i];
         _sum = 0;
         _cache = [];
         // calculate the sum from combination
-        for (let j = 0;j < _cca.length;j++) {
+        for (let j = 0; j < _cca.length; j++) {
           _sum += _cca[j];
           _cache.push(_cca[j]);
         }
         if (_sum === sum) {
           r.push(_cache);
-        } 
+        }
       }
       logic.core(array, sum, count - 1, r);
-    }
-  }
-  let result = []
+    },
+  };
+  let result = [];
 
-  let _array = logic.init(arr, sum)
+  let _array = logic.init(arr, sum);
 
-  logic.core(_array, sum, count, result)
+  logic.core(_array, sum, count, result);
 
-  return result
+  return result;
 }
