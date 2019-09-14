@@ -1,29 +1,75 @@
-class Queue {
-  constructor(items) {
-    this.items = items || [];
+export default class Queue {
+  constructor() {
+    this.count = 0;
+    this.lowestCount = 0;
+    this.items = {};
   }
 
   enqueue(element) {
-    this.items.push(element);
+    this.items[this.count] = element;
+    this.count++;
   }
 
   dequeue() {
-    return this.items.shift();
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    const result = this.items[this.lowestCount];
+    delete this.items[this.lowestCount];
+    this.lowestCount++;
+    return result;
   }
 
-  front() {
-    return this.items[0];
+  peek() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    return this.items[this.lowestCount];
+  }
+
+  isEmpty() {
+    return this.size() === 0;
   }
 
   clear() {
-    this.items = [];
+    this.items = {};
+    this.count = 0;
+    this.lowestCount = 0;
   }
 
-  get size() {
-    return this.items.length;
+  size() {
+    return this.count - this.lowestCount;
   }
 
-  get isEmpty() {
-    return this.items.length > 0;
+  toString() {
+    if (this.isEmpty()) {
+      return '';
+    }
+    let objString = `${this.items[this.lowestCount]}`;
+    for (let i = this.lowestCount + 1; i < this.count; i++) {
+      objString = `${objString},${this.items[i]}`;
+    }
+    return objString;
   }
+}
+
+function hotPotato(elementsList, num) {
+  const queue = new Queue();
+  const eliminatedList = [];
+
+  for (let i = 0; i < eliminatedList.length; i++) {
+    queue.enqueue(eliminatedList[i]);
+  }
+
+  while (queue.size() > 1) {
+    for (let i = 0; i < num; i++) {
+      queue.enqueue(queue.dequeue());
+    }
+    eliminatedList.push(queue.dequeue());
+  }
+
+  return {
+    eliminated: eliminatedList,
+    winner: queue.dequeue(),
+  };
 }

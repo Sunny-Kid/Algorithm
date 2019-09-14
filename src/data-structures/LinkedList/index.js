@@ -1,3 +1,5 @@
+import { defaultEquals } from '../util';
+
 class Node {
   constructor(element) {
     this.element = element;
@@ -6,95 +8,116 @@ class Node {
 }
 
 class LinkedList {
-  constructor() {
-    this.head = null;
-    this.length = 0;
+  constructor(equalsFn = defaultEquals) {
+    this.equalsFn = equalsFn;
+    this.count = 0;
+    this.head = undefined;
   }
 
-  append(element) {
+  push(element) {
     const node = new Node(element);
-    let current = null;
-    if (this.head === null) {
+    let current;
+    if (this.head == null) {
+      // catches null && undefined
       this.head = node;
     } else {
       current = this.head;
-      while (current.next) {
+      while (current.next != null) {
         current = current.next;
       }
       current.next = node;
     }
-    this.length++;
+    this.count++;
   }
 
-  // 任意位置插入元素
-  insert(position, element) {
-    if (position > 0 && position <= this.length) {
+  getElementAt(index) {
+    if (index >= 0 && index <= this.count) {
+      let node = this.head;
+      for (let i = 0; i < index && node != null; i++) {
+        node = node.next;
+      }
+      return node;
+    }
+    return undefined;
+  }
+
+  insert(element, index) {
+    if (index >= 0 && index <= this.count) {
       const node = new Node(element);
-      let previous = null;
-      let current = this.head;
-      let index = 0;
-      if (position === 0) {
-        this.head = node;
-        this.head.next = current;
-      } else {
-        while (index++ < position) {
-          previous = current;
-          current = current.next;
-        }
+      if (index === 0) {
+        const current = this.head;
         node.next = current;
+        this.head = node;
+      } else {
+        const previous = this.getElementAt(index - 1);
+        node.next = previous.next;
         previous.next = node;
       }
-      this.length++;
+      this.count++;
       return true;
     }
     return false;
   }
 
-  // 移除指定位置元素
-  removeAt(position) {
-    if (position > -1 && position < this.length) {
+  removeAt(index) {
+    if (index >= 0 && index < this.count) {
       let current = this.head;
-      let previous = null;
-      let index = 0;
-      if (position === 0) {
+      if (index === 0) {
         this.head = current.next;
       } else {
-        while (index++ < position) {
-          current = current.next;
-          previous = current;
-        }
+        const previous = this.getElementAt(index - 1);
+        current = previous.next;
         previous.next = current.next;
       }
-      this.length--;
+      this.count--;
       return current.element;
     }
-    return false;
+    return undefined;
   }
 
-  findIndex(element) {
-    let index = -1;
+  remove(element) {
+    const index = this.indexOf(element);
+    return this.removeAt(index);
+  }
+
+  indexOf(element) {
     let current = this.head;
-    while (current) {
-      if (current.element === element) {
-        return index + 1;
+    for (let i = 0; i < this.size() && current != null; i++) {
+      if (this.equalsFn(element, current.element)) {
+        return i;
       }
-      index++;
       current = current.next;
     }
     return -1;
   }
 
-  // 删除指定文档
-  remove(element) {
-    const index = this.findIndex(element);
-    return this.removeAt(index);
-  }
-
   isEmpty() {
-    return !this.length;
+    return this.size() === 0;
   }
 
   size() {
-    return this.length;
+    return this.count;
+  }
+
+  getHead() {
+    return this.head;
+  }
+
+  clear() {
+    this.head = undefined;
+    this.count = 0;
+  }
+
+  toString() {
+    if (this.head == null) {
+      return '';
+    }
+    let objString = `${this.head.element}`;
+    let current = this.head.next;
+    for (let i = 1; i < this.size() && current != null; i++) {
+      objString = `${objString},${current.element}`;
+      current = current.next;
+    }
+    return objString;
   }
 }
