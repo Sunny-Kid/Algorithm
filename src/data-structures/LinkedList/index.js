@@ -1,13 +1,13 @@
 import { defaultEquals } from '../util';
 
-class Node {
+export class Node {
   constructor(element) {
     this.element = element;
     this.next = null;
   }
 }
 
-class LinkedList {
+export class LinkedList {
   constructor(equalsFn = defaultEquals) {
     this.equalsFn = equalsFn;
     this.count = 0;
