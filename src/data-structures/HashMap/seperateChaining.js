@@ -1,4 +1,6 @@
 import { defaultToString } from '../util';
+import { LinkedList } from '../LinkedList';
+
 // 解决哈希冲突的三种方法（拉链法、开放地址法、再散列法）
 class ValuePair {
   constructor(key, value) {
