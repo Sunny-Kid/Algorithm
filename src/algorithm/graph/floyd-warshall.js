@@ -1,3 +1,9 @@
+/**
+ * 时间复杂度 O(n^3)
+ * 多源最短路径算法 - 动态规划
+ * @param {*} graph Graph
+ */
+
 export const floydWarshall = graph => {
   const dist = [];
   const { length } = graph;

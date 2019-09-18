@@ -1,3 +1,9 @@
+/**
+ * 时间复杂度 O(n^2)
+ * 单源最短路径算法 - 贪心算法
+ * @param {*} graph Graph
+ */
+
 const INF = Number.MAX_SAFE_INTEGER;
 const minDistance = (dist, visited) => {
   let min = INF;
