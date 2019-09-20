@@ -44,6 +44,6 @@ const { BinarySearchTree } = require('js-data-structures')
 2. unit test
 3. TypeScript
 
-## Issue adn Question
+## Issue and Question
 
 Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull Request](https://github.com/Sunny-Kid/Algorithm/pulls) 
