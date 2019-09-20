@@ -1,18 +1,48 @@
-# 关于数据结构与算法的学习
+# JavaScript Data Structures and Algorithms
 
-## 目录结构
+## Project Structure
+`src/index.js` file contains all the data structures 
 
-``` javascript
-Algorithm
-  |---- BFS.js // 广度优先搜索
-  |---- DFS.js // 深度优先搜索
-  |---- BFS.js // 二叉搜索树
-  |---- dictionary.js // 字典类
-  |---- hashTable.js // 哈希表
-  |---- LinkedList.js // 链表
-  |---- ListSort.js // 链表排序
-  |---- set.js // 集合
-  |---- stairs.js // 楼梯
-  |---- sum.js // 求和
-  |---- trie.js // trie树
 ```
+|_misc (ignore this, not influenced by your usage)
+|_src 
+|_____data-structures
+|_____algorithm
+|_____index.js
+```
+
+## Install
+
+### yarn
+
+```bash
+yarn add js-data-structures
+```
+
+### npm
+
+```bash
+npm install --save js-data-structures
+```
+
+## Import
+
+### ES2015
+
+```javascript
+import { BinarySearchTree } from 'js-data-structures'
+```
+
+### CommonJS
+
+```javascript
+const { BinarySearchTree } = require('js-data-structures')
+```
+
+## Todo
+1. usage examples
+2. unit test
+
+### Found an issue or have a question?
+
+Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull Request](https://github.com/Sunny-Kid/Algorithm/pulls) 
