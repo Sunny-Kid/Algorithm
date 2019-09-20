@@ -1,5 +1,8 @@
 # JavaScript Data Structures and Algorithms
 
+[![NPM version][npm-image]][npm-url]
+![][travis-url]
+
 ## Project Structure
 `src/index.js` file contains all the data structures 
 
@@ -50,3 +53,7 @@ Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull
 
 ## License
 [MIT](https://github.com/Sunny-Kid/Algorithm/blob/master/LICENSE)
+
+[npm-url]: https://www.npmjs.com/package/js-common-data-structures
+[npm-image]: https://badge.fury.io/js/js-common-data-structures.png
+[travis-url]: https://api.travis-ci.com/lSunny-Kid/Algorithm.svg?branch=master
