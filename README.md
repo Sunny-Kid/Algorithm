@@ -40,7 +40,7 @@ const { BinarySearchTree } = require('js-common-data-structures')
 ```
 
 ## Todo
-1. usage examples
+1. usage docs
 2. unit test
 3. TypeScript
 
