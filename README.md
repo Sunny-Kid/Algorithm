@@ -16,13 +16,13 @@
 ### yarn
 
 ```bash
-yarn add js-data-structures
+yarn add js-common-data-structures
 ```
 
 ### npm
 
 ```bash
-npm install --save js-data-structures
+npm install --save js-common-data-structures
 ```
 
 ## Import
@@ -30,13 +30,13 @@ npm install --save js-data-structures
 ### ES2015
 
 ```javascript
-import { BinarySearchTree } from 'js-data-structures'
+import { BinarySearchTree } from 'js-common-data-structures'
 ```
 
 ### CommonJS
 
 ```javascript
-const { BinarySearchTree } = require('js-data-structures')
+const { BinarySearchTree } = require('js-common-data-structures')
 ```
 
 ## Todo
