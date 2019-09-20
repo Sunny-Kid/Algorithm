@@ -42,6 +42,7 @@ const { BinarySearchTree } = require('js-data-structures')
 ## Todo
 1. usage examples
 2. unit test
+3. TypeScript
 
 ## Issue adn Question
 
