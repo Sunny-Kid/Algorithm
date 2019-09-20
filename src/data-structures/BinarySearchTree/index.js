@@ -2,7 +2,7 @@
  * BST - 二叉搜索树数据结构的实现
  */
 import { Node } from './models/node';
-import { defaultCompare, COMPARE } from '../util/index';
+import { defaultCompare, Compare } from '../util/index';
 
 export default class BinarySearchTree {
   constructor(compareFn = defaultCompare) {
@@ -20,7 +20,7 @@ export default class BinarySearchTree {
   }
 
   insertNode(node, newNode) {
-    if (this.compareFn(newNode.key, node.key) === COMPARE.LESS_THAN) {
+    if (this.compareFn(newNode.key, node.key) === Compare.LESS_THAN) {
       if (node.left === null) {
         node.left = newNode;
       } else {
@@ -101,9 +101,9 @@ export default class BinarySearchTree {
 
   searchNode(node, key) {
     if (node === null) return false;
-    if (this.compareFn(key, node.key) === COMPARE.LESS_THAN) {
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
       return this.searchNode(node.left, key);
-    } else if (this.compareFn(key, node.key) === COMPARE.BIGGER_THAN) {
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
       return this.searchNode(node.right, key);
     } else {
       return true;
@@ -118,10 +118,10 @@ export default class BinarySearchTree {
     if (node == null) {
       return null;
     }
-    if (this.compareFn(key, node.key) === COMPARE.LESS_THAN) {
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
       node.left = this.removeNode(node.left, key);
       return node;
-    } else if (this.compareFn(key, node.key) === COMPARE.BIGGER_THAN) {
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
       node.right = this.removeNode(node.right, key);
       return node;
     } else {

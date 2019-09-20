@@ -1,11 +1,11 @@
-class TrieNode {
+export class TrieNode {
   constructor(key) {
     this.key = key;
     this.children = [];
   }
 }
 
-class Trie {
+export default class Trie {
   constructor() {
     this.root = new TrieNode(null);
   }

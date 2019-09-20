@@ -1,5 +1,5 @@
 import BinarySearchTree from '../BinarySearchTree';
-import { COMPARE } from '../util';
+import { Compare } from '../util';
 
 const BalanceFactor = {
   UNBALANCED_RIGHT: 1,
@@ -77,9 +77,9 @@ export default class AVLTree extends BinarySearchTree {
     // insert node as in BST tree
     if (node == null) {
       return new Node(key);
-    } else if (this.compareFn(key, node.key) === COMPARE.LESS_THAN) {
+    } else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
       node.left = this.insertNode(node.left, key);
-    } else if (this.compareFn(key, node.key) === COMPARE.BIGGER_THAN) {
+    } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
       node.right = this.insertNode(node.right, key);
     } else {
       return node; // duplicated key
@@ -87,14 +87,14 @@ export default class AVLTree extends BinarySearchTree {
     // balance the tree if needed
     const balanceFactor = this.getBalanceFactor(node);
     if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
-      if (this.compareFn(key, node.left.key) === COMPARE.LESS_THAN) {
+      if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
         node = this.rotationLL(node);
       } else {
         return this.rotationLR(node);
       }
     }
     if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
-      if (this.compareFn(key, node.right.key) === COMPARE.BIGGER_THAN) {
+      if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
         node = this.rotationRR(node);
       } else {
         return this.rotationRL(node);

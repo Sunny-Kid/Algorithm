@@ -1,6 +1,6 @@
 import BinarySearchTree from '../BinarySearchTree';
 import { Node } from '../BinarySearchTree/models/node';
-import { defaultCompare, COMPARE } from '../util/index';
+import { defaultCompare, Compare } from '../util/index';
 
 const Colors = {
   BLACK: 'black',
@@ -24,7 +24,7 @@ export default class RedBlackTree extends BinarySearchTree {
   }
 
   insertNode(node, key) {
-    if (this.compareFn(key, node.key) === COMPARE.LESS_THAN) {
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
       if (node.left === null) {
         node.left = new RedBlackNode(key);
         node.left.parent = node;
