@@ -43,6 +43,6 @@ const { BinarySearchTree } = require('js-data-structures')
 1. usage examples
 2. unit test
 
-### Found an issue or have a question?
+## Issue adn Question
 
 Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull Request](https://github.com/Sunny-Kid/Algorithm/pulls) 
