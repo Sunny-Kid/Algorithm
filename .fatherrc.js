@@ -7,7 +7,7 @@ export default {
   doc: {
     src: './docs',
     public: './public',
-    base: '/algorithm/',
+    base: '/Algorithm/',
     title: 'js-common-data-structures',
     description: 'JavaScript Data Structures',
     plugins: [splash()]
