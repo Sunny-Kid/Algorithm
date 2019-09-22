@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/Sunny-Kid/Algorithm.git"
   },
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
