@@ -10,9 +10,10 @@
   "module": "dist/index.es.js",
   "scripts": {
     "lint:fix": "eslint src --fix",
-    "build": "rollup -c",
-    "build:dev": "NODE_ENV=development webpack --progress --colors",
-    "build:prod": "NODE_ENV=production webpack --progress --colors"
+    "start": "father doc dev",
+    "doc": "father doc build && cpx docs/404.html .docz/dist/ && father doc deploy",
+    "build": "father build",
+    "prepare": "npm run build"
   },
   "author": "Hank Ren",
   "license": "MIT",
@@ -36,17 +37,16 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
     "babel-eslint": "^10.0.3",
+    "cpx": "^1.5.0",
+    "docz-plugin-splash": "^1.0.1",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
+    "father": "^2.18.5",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2",
-    "rollup": "^1.21.4",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "prettier": "^1.18.2"
   },
   "sideEffects": false,
   "dependencies": {}

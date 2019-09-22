@@ -1,0 +1,81 @@
+---
+name: Getting Started
+route: /
+---
+
+export const exampleSrc =
+  process.env.NODE_ENV === 'development'
+    ? '/public/example.gif'
+    : process.env.PUBLIC_URL + 'public/example.gif'
+
+## Why axios-last
+
+Once you are seeking for a solution that only take the last value from multiple axios calls, `Rx.js` might be good choice.
+
+What if you don't like `Rx.js`? I am right here!!!
+
+Let's feel how it helps:
+
+<img src={exampleSrc} alt="example" style={{ width: '100%' }} />
+
+## Installation
+
+### yarn
+
+```bash
+yarn add axios-last
+```
+
+### npm
+
+```bash
+npm install axios-last
+```
+
+## Usage
+
+```javascript
+import { create } from 'axios-last'
+
+const request = create()
+
+for (let i = 0; i < 3; i++) {
+  request({
+    method: 'GET',
+    url: 'https://test.com/users',
+    params: {
+      name: i
+    }
+  }).then(res => {
+    // only request with name === 2 received
+    // all previous requests were cancelled while subsequent request made
+  })
+}
+```
+
+**With AxiosInstance specified**
+
+```javascript
+import axios from 'axios'
+import { create } from 'axios-last'
+
+const instance = axios.create({
+  baseURL: 'https://test.api.com'
+})
+
+// you can specify axiosInstance for a reason
+const request = create(instance)
+
+for (let i = 0; i < 3; i++) {
+  request({
+    method: 'GET',
+    url: 'https://test.com/users',
+    params: {
+      name: i
+    }
+  }).then(res => {
+    // only request with name === 2 received
+    // all previous requests were cancelled while subsequent request made
+  })
+}
+```

@@ -2,6 +2,7 @@
 
 [![NPM version][npm-image]][npm-url]
 ![][travis-url]
+![][license-url]
 
 ## Project Structure
 `src/index.js` file contains all the data structures 
@@ -57,3 +58,4 @@ Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull
 [npm-url]: https://www.npmjs.com/package/js-common-data-structures
 [npm-image]: https://badge.fury.io/js/js-common-data-structures.png
 [travis-url]: https://api.travis-ci.com/lSunny-Kid/Algorithm.svg?branch=master
+[license-url]: https://img.shields.io/npm/l/js-common-data-structures.svg
