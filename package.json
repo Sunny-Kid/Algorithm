@@ -9,8 +9,13 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "javascript",
+    "data-structures"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "lint:fix": "eslint src --fix",
     "start": "father doc dev",
@@ -39,6 +44,8 @@
     "@babel/preset-env": "^7.6.0",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
     "babel-eslint": "^10.0.3",
     "cpx": "^1.5.0",
     "docz-plugin-splash": "^1.0.1",
@@ -49,7 +56,8 @@
     "father": "^2.18.5",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.3"
   },
   "sideEffects": false,
   "dependencies": {}

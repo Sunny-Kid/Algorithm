@@ -1,7 +1,15 @@
 import BinarySearchTree from '../BinarySearchTree';
-import { Compare } from '../util';
+import { Compare, defaultCompare } from '../util';
 
-const BalanceFactor = {
+interface BalanceFactor {
+  UNBALANCED_RIGHT?: number;
+  SLIGHTLY_UNBALANCED_RIGHT?: number;
+  BALANCED?: number;
+  SLIGHTLY_UNBALANCED_LEFT?: number;
+  UNBALANCED_LEFT?: number;
+}
+
+const BalanceFactor: BalanceFactor = {
   UNBALANCED_RIGHT: 1,
   SLIGHTLY_UNBALANCED_RIGHT: 2,
   BALANCED: 3,
@@ -9,7 +17,21 @@ const BalanceFactor = {
   UNBALANCED_LEFT: 5,
 };
 
+class Node {
+  private key: number;
+  private left: null;
+  private right: null;
+
+  constructor(key: number) {
+    this.key = key;
+    this.left = null;
+    this.right = null;
+  }
+}
+
 export default class AVLTree extends BinarySearchTree {
+  private compareFn: Function;
+  private root: null;
   constructor(compareFn = defaultCompare) {
     super(compareFn);
     this.compareFn = compareFn;
@@ -20,15 +42,11 @@ export default class AVLTree extends BinarySearchTree {
     if (node === null) {
       return -1;
     }
-    return (
-      Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) +
-      1
-    );
+    return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1;
   }
 
   getBalanceFactor(node) {
-    const heightDifference =
-      this.getNodeHeight(node.left) - this.getNodeHeight(node.right);
+    const heightDifference = this.getNodeHeight(node.left) - this.getNodeHeight(node.right);
     switch (heightDifference) {
       case -2:
         return BalanceFactor.UNBALANCED_RIGHT;
