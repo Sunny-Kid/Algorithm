@@ -3,79 +3,41 @@ name: Getting Started
 route: /
 ---
 
-export const exampleSrc =
-  process.env.NODE_ENV === 'development'
-    ? '/public/example.gif'
-    : process.env.PUBLIC_URL + 'public/example.gif'
-
-## Why axios-last
-
-Once you are seeking for a solution that only take the last value from multiple axios calls, `Rx.js` might be good choice.
-
-What if you don't like `Rx.js`? I am right here!!!
-
-Let's feel how it helps:
-
-<img src={exampleSrc} alt="example" style={{ width: '100%' }} />
-
 ## Installation
 
 ### yarn
 
 ```bash
-yarn add axios-last
+yarn add js-common-data-structures
 ```
 
 ### npm
 
 ```bash
-npm install axios-last
+npm install js-common-data-structures
 ```
 
-## Usage
+## Binary Search Tree
 
 ```javascript
-import { create } from 'axios-last'
+import { BinarySearchTree } from 'js-common-data-structures'
 
-const request = create()
-
-for (let i = 0; i < 3; i++) {
-  request({
-    method: 'GET',
-    url: 'https://test.com/users',
-    params: {
-      name: i
-    }
-  }).then(res => {
-    // only request with name === 2 received
-    // all previous requests were cancelled while subsequent request made
-  })
-}
+const tree = new BinarySearchTree()
+tree.insert(12) // Add tree node
+tree.preOrderTraverse(callback) // preOrderTraverse
+tree.postOrderTraverse(callback) // postOrderTraverse
+tree.inOrderTraverse(callback) // inOrderTraverse
+tree.min() // find the minimum
+tree.max() // find the maximum
+tree.search(key) // find the tree key
+tree.remove(key) // find the key
 ```
-
-**With AxiosInstance specified**
+## AVL Tree
 
 ```javascript
-import axios from 'axios'
-import { create } from 'axios-last'
+import { AVLTree } from 'js-common-data-structures'
+const tree = new AVLTree()
 
-const instance = axios.create({
-  baseURL: 'https://test.api.com'
-})
+tree.insert(key) // insert key
 
-// you can specify axiosInstance for a reason
-const request = create(instance)
-
-for (let i = 0; i < 3; i++) {
-  request({
-    method: 'GET',
-    url: 'https://test.com/users',
-    params: {
-      name: i
-    }
-  }).then(res => {
-    // only request with name === 2 received
-    // all previous requests were cancelled while subsequent request made
-  })
-}
 ```
