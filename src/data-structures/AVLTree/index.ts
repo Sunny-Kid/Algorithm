@@ -29,7 +29,7 @@ class Node {
   }
 }
 
-export default class AVLTree extends BinarySearchTree {
+export default class AVLTree<T> extends BinarySearchTree<T> {
   compareFn: any;
   root: any;
   constructor(compareFn = defaultCompare) {

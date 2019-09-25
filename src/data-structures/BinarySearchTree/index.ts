@@ -4,8 +4,11 @@
 import { Node } from './models/node';
 import { defaultCompare, Compare } from '../util/index';
 
-export default class BinarySearchTree {
-  constructor(compareFn = defaultCompare) {
+export default class BinarySearchTree<T> {
+  public root: Node<T>
+  public compareFn: any;
+
+  public constructor(compareFn = defaultCompare) {
     this.root = null;
     this.compareFn = compareFn;
   }
@@ -19,7 +22,7 @@ export default class BinarySearchTree {
     }
   }
 
-  insertNode(node, newNode) {
+  insertNode(node: Node<T>, newNode: Node<T>) {
     if (this.compareFn(newNode.key, node.key) === Compare.LESS_THAN) {
       if (node.left === null) {
         node.left = newNode;
@@ -36,7 +39,7 @@ export default class BinarySearchTree {
   }
 
   inOrderTraverse(callback) {
-    inOrderTraverseNode(this.root, callback);
+    this.inOrderTraverseNode(this.root, callback);
   }
 
   inOrderTraverseNode(node, callback) {
@@ -65,8 +68,8 @@ export default class BinarySearchTree {
 
   postOrderTraverseNode(node, callback) {
     if (node !== null) {
-      postOrderTraverseNode(node.left, callback);
-      postOrderTraverseNode(node.right, callback);
+      this.postOrderTraverseNode(node.left, callback);
+      this.postOrderTraverseNode(node.right, callback);
       callback(node.key);
     }
   }
@@ -84,7 +87,7 @@ export default class BinarySearchTree {
   }
 
   max() {
-    return this.maxNode(node);
+    return this.maxNode(this.root);
   }
 
   maxNode(node) {
@@ -108,6 +111,10 @@ export default class BinarySearchTree {
     } else {
       return true;
     }
+  }
+
+  getRoot() {
+    return this.root;
   }
 
   remove(key) {
