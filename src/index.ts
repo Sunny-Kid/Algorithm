@@ -2,7 +2,7 @@ import * as _util from './data-structures/util';
 
 export const util = _util;
 
-export { default as AVLTree } from './data-structures/AVLTree';
+export { default as AVLTree } from './data-structures/AVLTree';
 export { default as BinarySearchTree } from './data-structures/BinarySearchTree';
 export { default as CircularLinkedList } from './data-structures/CircularLinkedList';
 export { default as Deque } from './data-structures/Deque';

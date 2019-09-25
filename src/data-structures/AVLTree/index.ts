@@ -30,8 +30,8 @@ class Node {
 }
 
 export default class AVLTree extends BinarySearchTree {
-  private compareFn: Function;
-  private root: null;
+  compareFn: any;
+  root: any;
   constructor(compareFn = defaultCompare) {
     super(compareFn);
     this.compareFn = compareFn;
