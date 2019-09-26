@@ -1,7 +1,8 @@
 {
-  "vendors.js": "/Algorithm/static/js/vendors.a96ab6af.js",
+  "vendors.css": "/Algorithm/static/css/vendors.489e0044871ca4796de9.css",
+  "vendors.js": "/Algorithm/static/js/vendors.70d6ec66.js",
   "1-home.js": "/Algorithm/static/js/1-home.50f49d13.js",
   "2-contribute.js": "/Algorithm/static/js/2-contribute.6c664ffa.js",
-  "app.js": "/Algorithm/static/js/app.9610591de30bf01a7f50.js",
+  "app.js": "/Algorithm/static/js/app.489e0044871ca4796de9.js",
   "index.html": "/Algorithm/index.html"
 }
