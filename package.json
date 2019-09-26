@@ -19,9 +19,10 @@
   "scripts": {
     "lint:fix": "eslint src --fix",
     "start": "father doc dev",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "doc": "father doc build && father doc deploy",
     "build": "father build",
-    "test": "jest --coverage",
+    "test": "jest --config ./jest.config.js",
     "prepare": "npm run build"
   },
   "author": "Hank Ren",
@@ -50,6 +51,7 @@
     "@typescript-eslint/parser": "^2.3.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "coveralls": "^3.0.6",
     "cpx": "^1.5.0",
     "docz-plugin-splash": "^1.0.1",
     "eslint": "^6.3.0",

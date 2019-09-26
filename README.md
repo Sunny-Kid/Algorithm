@@ -2,6 +2,8 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
+[![Coverage Status][coverage-image]][coverage-url]
+![][dt-url]
 ![][license-url]
 
 ## Project Structure
@@ -59,4 +61,7 @@ Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull
 [npm-image]: https://badge.fury.io/js/js-common-data-structures.png
 [travis-image]: https://api.travis-ci.com/Sunny-Kid/Algorithm.svg?branch=master
 [travis-url]: https://travis-ci.org/Sunny-Kid/Algorithm
+[coverage-image]: https://coveralls.io/repos/github/Sunny-Kid/Algorithm/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/Sunny-Kid/Algorithm
+[dt-url]: https://img.shields.io/npm/dt/js-common-data-structures.svg
 [license-url]: https://img.shields.io/npm/l/js-common-data-structures.svg
