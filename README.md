@@ -57,6 +57,6 @@ Please create an [Issue](https://github.com/Sunny-Kid/Algorithm/issues) or [Pull
 
 [npm-url]: https://www.npmjs.com/package/js-common-data-structures
 [npm-image]: https://badge.fury.io/js/js-common-data-structures.png
-[travis-image]: https://api.travis-ci.com/lSunny-Kid/Algorithm.svg?branch=master
+[travis-image]: https://api.travis-ci.com/Sunny-Kid/Algorithm.svg?branch=master
 [travis-url]: https://travis-ci.org/Sunny-Kid/Algorithm
 [license-url]: https://img.shields.io/npm/l/js-common-data-structures.svg
