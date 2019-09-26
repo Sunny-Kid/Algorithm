@@ -19,7 +19,7 @@
   "scripts": {
     "lint:fix": "eslint src --fix",
     "start": "father doc dev",
-    "coverage": "cat coverage/lcov.info | coveralls",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "doc": "father doc build && father doc deploy",
     "build": "father build",
     "test": "jest --config ./jest.config.js",
