@@ -1,51 +1,28 @@
 import BinarySearchTree from '../BinarySearchTree';
-import { Compare, defaultCompare } from '../util';
+import { Compare, defaultCompare, ICompareFunction } from '../util';
+import { Node } from '../models/node';
 
-interface BalanceFactor {
-  UNBALANCED_RIGHT?: number;
-  SLIGHTLY_UNBALANCED_RIGHT?: number;
-  BALANCED?: number;
-  SLIGHTLY_UNBALANCED_LEFT?: number;
-  UNBALANCED_LEFT?: number;
-}
-
-const BalanceFactor: BalanceFactor = {
-  UNBALANCED_RIGHT: 1,
-  SLIGHTLY_UNBALANCED_RIGHT: 2,
-  BALANCED: 3,
-  SLIGHTLY_UNBALANCED_LEFT: 4,
-  UNBALANCED_LEFT: 5,
-};
-
-class Node {
-  private key: number;
-  private left: null;
-  private right: null;
-
-  constructor(key: number) {
-    this.key = key;
-    this.left = null;
-    this.right = null;
-  }
+enum BalanceFactor {
+  UNBALANCED_RIGHT = 1,
+  SLIGHTLY_UNBALANCED_RIGHT = 2,
+  BALANCED = 3,
+  SLIGHTLY_UNBALANCED_LEFT = 4,
+  UNBALANCED_LEFT = 5,
 }
 
 export default class AVLTree<T> extends BinarySearchTree<T> {
-  compareFn: any;
-  root: any;
-  constructor(compareFn = defaultCompare) {
+  constructor(protected compareFn: ICompareFunction<T> = defaultCompare) {
     super(compareFn);
-    this.compareFn = compareFn;
-    this.root = null;
   }
 
-  getNodeHeight(node) {
+  private getNodeHeight(node: Node<T>): number {
     if (node === null) {
       return -1;
     }
     return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1;
   }
 
-  getBalanceFactor(node) {
+  private getBalanceFactor(node: Node<T>): number {
     const heightDifference = this.getNodeHeight(node.left) - this.getNodeHeight(node.right);
     switch (heightDifference) {
       case -2:
@@ -62,7 +39,7 @@ export default class AVLTree<T> extends BinarySearchTree<T> {
   }
 
   // 右旋转
-  rotationLL(node) {
+  private rotationLL(node: Node<T>): Node<T> {
     const tmp = node.left;
     node.left = tmp.right;
     tmp.right = node;
@@ -70,28 +47,28 @@ export default class AVLTree<T> extends BinarySearchTree<T> {
   }
 
   // 左旋转
-  rotationRR(node) {
+  private rotationRR(node: Node<T>): Node<T> {
     const tmp = node.right;
     node.right = tmp.left;
     tmp.left = node;
     return tmp;
   }
 
-  rotationLR(node) {
+  private rotationLR(node: Node<T>): Node<T> {
     node.left = this.rotationRR(node.left);
     return this.rotationLL(node);
   }
 
-  rotationRL(node) {
+  private rotationRL(node: Node<T>): Node<T> {
     node.right = this.rotationLL(node.right);
     return this.rotationRR(node);
   }
 
-  insert(key) {
+  insert(key: T): void {
     this.root = this.insertNode(this.root, key);
   }
 
-  insertNode(node, key) {
+  protected insertNode(node: Node<T>, key: T): Node<T> {
     // insert node as in BST tree
     if (node == null) {
       return new Node(key);
@@ -121,7 +98,7 @@ export default class AVLTree<T> extends BinarySearchTree<T> {
     return node;
   }
 
-  removeNode(node, key) {
+  protected removeNode(node: Node<T>, key: T): Node<T> {
     node = super.removeNode(node, key);
     if (node == null) {
       return node; // null, no need to balance

@@ -1,48 +1,42 @@
 /**
  * BST - 二叉搜索树数据结构的实现
  */
-import { Node } from './models/node';
-import { defaultCompare, Compare } from '../util/index';
+import { Node } from '../models/node';
+import { defaultCompare, Compare, ICompareFunction } from '../util/index';
 
 export default class BinarySearchTree<T> {
-  public root: Node<T>
-  public compareFn: any;
+  protected root: Node<T>;
 
-  public constructor(compareFn = defaultCompare) {
-    this.root = null;
-    this.compareFn = compareFn;
-  }
+  constructor(protected compareFn: ICompareFunction<T> = defaultCompare) {}
 
-  insert(key) {
-    const newNode = new Node(key);
-    if (this.root === null) {
-      this.root = newNode;
+  insert(key: T): void {
+    // special case: first key
+    if (this.root == null) {
+      this.root = new Node(key);
     } else {
-      this.insertNode(this.root, newNode);
+      this.insertNode(this.root, key);
     }
   }
 
-  insertNode(node: Node<T>, newNode: Node<T>) {
-    if (this.compareFn(newNode.key, node.key) === Compare.LESS_THAN) {
-      if (node.left === null) {
-        node.left = newNode;
+  protected insertNode(node: Node<T>, key: T): void {
+    if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
+      if (node.left == null) {
+        node.left = new Node(key);
       } else {
-        this.insertNode(node.left, newNode);
+        this.insertNode(node.left, key);
       }
+    } else if (node.right == null) {
+      node.right = new Node(key);
     } else {
-      if (node.right === null) {
-        node.right = newNode;
-      } else {
-        this.insertNode(node.right, newNode);
-      }
+      this.insertNode(node.right, key);
     }
   }
 
-  inOrderTraverse(callback) {
+  inOrderTraverse(callback): void {
     this.inOrderTraverseNode(this.root, callback);
   }
 
-  inOrderTraverseNode(node, callback) {
+  private inOrderTraverseNode(node, callback): void {
     if (node !== null) {
       this.inOrderTraverseNode(node.left, callback);
       callback(node.key);
@@ -50,11 +44,11 @@ export default class BinarySearchTree<T> {
     }
   }
 
-  preOrderTraverse(callback) {
+  preOrderTraverse(callback): void {
     this.preOrderTraverseNode(this.root, callback);
   }
 
-  preOrderTraverseNode(node, callback) {
+  private preOrderTraverseNode(node, callback): void {
     if (node !== null) {
       callback(node.key);
       this.preOrderTraverseNode(node.left, callback);
@@ -62,11 +56,11 @@ export default class BinarySearchTree<T> {
     }
   }
 
-  postOrderTraverse(callback) {
+  postOrderTraverse(callback): void {
     this.postOrderTraverseNode(this.root, callback);
   }
 
-  postOrderTraverseNode(node, callback) {
+  private postOrderTraverseNode(node, callback): void {
     if (node !== null) {
       this.postOrderTraverseNode(node.left, callback);
       this.postOrderTraverseNode(node.right, callback);
@@ -74,11 +68,11 @@ export default class BinarySearchTree<T> {
     }
   }
 
-  min() {
+  min(): Node<T> {
     return this.minNode(this.root);
   }
 
-  minNode(node) {
+  protected minNode(node: Node<T>): Node<T> {
     let current = node;
     while (current !== null && current.left !== null) {
       current = current.left;
@@ -86,11 +80,11 @@ export default class BinarySearchTree<T> {
     return current;
   }
 
-  max() {
+  max(): Node<T> {
     return this.maxNode(this.root);
   }
 
-  maxNode(node) {
+  protected maxNode(node: Node<T>): Node<T> {
     let current = node;
     while (current !== null && current.right !== null) {
       current = current.right;
@@ -98,11 +92,11 @@ export default class BinarySearchTree<T> {
     return current;
   }
 
-  search(key) {
+  search(key: T): boolean {
     return this.searchNode(this.root, key);
   }
 
-  searchNode(node, key) {
+  private searchNode(node: Node<T>, key: T): boolean {
     if (node === null) return false;
     if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
       return this.searchNode(node.left, key);
@@ -113,15 +107,15 @@ export default class BinarySearchTree<T> {
     }
   }
 
-  getRoot() {
+  getRoot(): Node<T> {
     return this.root;
   }
 
-  remove(key) {
+  remove(key: T): Node<T> {
     return this.removeNode(this.root, key);
   }
 
-  removeNode(node, key) {
+  protected removeNode(node: Node<T>, key: T): Node<T> {
     if (node == null) {
       return null;
     }
@@ -132,10 +126,20 @@ export default class BinarySearchTree<T> {
       node.right = this.removeNode(node.right, key);
       return node;
     } else {
+      // key is equal to node.item
+
+      // handle 3 special conditions
+      // 1 - a leaf node
+      // 2 - a node with only 1 child
+      // 3 - a node with 2 children
+
+      // case 1
       if (node.left == null && node.right == null) {
         node = null;
         return node;
       }
+
+      // case 2
       if (node.left == null) {
         node = node.right;
         return node;
@@ -143,6 +147,8 @@ export default class BinarySearchTree<T> {
         node = node.left;
         return node;
       }
+
+      // case 3
       const aux = this.minNode(node.right);
       node.key = aux.key;
       node.right = this.removeNode(node.right, aux.key);
