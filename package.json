@@ -10,7 +10,9 @@
     "dist"
   ],
   "keywords": [
-    "javascript",
+    "JavaScript",
+    "TypeScript",
+    "algorithm",
     "data-structures"
   ],
   "main": "dist/index.js",
