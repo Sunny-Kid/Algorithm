@@ -1,5 +1,5 @@
 import BinarySearchTree from '../BinarySearchTree';
-import { Node } from '../BinarySearchTree/models/node';
+import { Node } from '../models/node';
 import { defaultCompare, Compare } from '../util/index';
 
 const Colors = {
