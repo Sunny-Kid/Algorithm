@@ -1,12 +1,13 @@
-import { defaultEquals } from '../util';
-import LinkedList, { Node } from '../LinkedList';
+import { defaultEquals, IEqualFunction } from '../util';
+import LinkedList from '../LinkedList';
+import { Node } from '../models/linked-list-models';
 
-export default class CircularLinkedList extends LinkedList {
-  constructor(equalsFn = defaultEquals) {
+export default class CircularLinkedList<T> extends LinkedList<T> {
+  constructor(equalsFn: IEqualFunction<T> = defaultEquals) {
     super(equalsFn);
   }
 
-  push(element) {
+  push(element: T): void {
     const node = new Node(element);
     let current;
     if (this.head == null) {
@@ -20,7 +21,7 @@ export default class CircularLinkedList extends LinkedList {
     this.count++;
   }
 
-  insert(element, index) {
+  insert(element: T, index: number): boolean {
     if (index >= 0 && index <= this.count) {
       const node = new Node(element);
       let current = this.head;
@@ -47,7 +48,7 @@ export default class CircularLinkedList extends LinkedList {
     return false;
   }
 
-  removeAt(index) {
+  removeAt(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
       let current = this.head;
       if (index === 0) {

@@ -1,11 +1,15 @@
-export default class Deque {
+export default class Deque<T> {
+  private count: number;
+  private lowestCount: number;
+  private items: any;
+
   constructor() {
     this.count = 0;
     this.lowestCount = 0;
     this.items = {};
   }
 
-  addFront(element) {
+  addFront(element: T): void {
     if (this.isEmpty()) {
       this.addBack(element);
     } else if (this.lowestCount > 0) {
@@ -20,12 +24,12 @@ export default class Deque {
     }
   }
 
-  addBack(element) {
+  addBack(element: T): void {
     this.items[this.count] = element;
     this.count++;
   }
 
-  removeFront() {
+  removeFront(): T {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -35,7 +39,7 @@ export default class Deque {
     return result;
   }
 
-  removeBack() {
+  removeBack(): T {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -45,35 +49,35 @@ export default class Deque {
     return result;
   }
 
-  peekFront() {
+  peekFront(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
     return this.items[this.lowestCount];
   }
 
-  peekBack() {
+  peekBack(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
     return this.items[this.count - 1];
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
-  clear() {
+  clear(): void {
     this.items = {};
     this.count = 0;
     this.lowestCount = 0;
   }
 
-  size() {
+  size(): number {
     return this.count - this.lowestCount;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) {
       return '';
     }
@@ -86,11 +90,7 @@ export default class Deque {
 }
 
 function palindromeChecker(aString) {
-  if (
-    aString === undefined ||
-    aString === null ||
-    (aString !== null && aString.length === 0)
-  ) {
+  if (aString === undefined || aString === null || (aString !== null && aString.length === 0)) {
     return false;
   }
   const deque = new Deque();

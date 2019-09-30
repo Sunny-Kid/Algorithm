@@ -1,15 +1,18 @@
-export default class Stack {
+export default class Stack<T> {
+  private count: number;
+  private items: any;
+
   constructor() {
     this.count = 0;
     this.items = {};
   }
 
-  push(element) {
+  push(element: T): void {
     this.items[this.count] = element;
     this.count++;
   }
 
-  pop() {
+  pop(): T {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -19,22 +22,22 @@ export default class Stack {
     return result;
   }
 
-  peek() {
+  peek(): T | undefined {
     if (this.isEmpty()) {
       return undefined;
     }
     return this.items[this.count - 1];
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.count === 0;
   }
 
-  size() {
+  size(): number {
     return this.count;
   }
 
-  clear() {
+  clear(): void {
     /* while (!this.isEmpty()) {
         this.pop();
       } */
@@ -42,7 +45,7 @@ export default class Stack {
     this.count = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) {
       return '';
     }
@@ -54,7 +57,7 @@ export default class Stack {
   }
 }
 
-function decimalToBinary(decNumber) {
+function decimalToBinary(decNumber: number): string {
   const stack = [];
   let number = decNumber;
   let binaryString = '';
@@ -72,7 +75,7 @@ function decimalToBinary(decNumber) {
   return binaryString;
 }
 
-function baseConverter(decNumber, base) {
+function baseConverter(decNumber: number, base: number): string {
   const stack = [];
   const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let number = decNumber;

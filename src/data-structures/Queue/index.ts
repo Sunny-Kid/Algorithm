@@ -1,16 +1,20 @@
-export default class Queue {
+export default class Queue<T> {
+  private count: number;
+  private lowestCount: number;
+  private items: { [key: number]: T };
+
   constructor() {
     this.count = 0;
     this.lowestCount = 0;
     this.items = {};
   }
 
-  enqueue(element) {
+  enqueue(element: T): void {
     this.items[this.count] = element;
     this.count++;
   }
 
-  dequeue() {
+  dequeue(): T {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -20,28 +24,28 @@ export default class Queue {
     return result;
   }
 
-  peek() {
+  peek(): T {
     if (this.isEmpty()) {
       return undefined;
     }
     return this.items[this.lowestCount];
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
-  clear() {
+  clear(): void {
     this.items = {};
     this.count = 0;
     this.lowestCount = 0;
   }
 
-  size() {
+  size(): number {
     return this.count - this.lowestCount;
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) {
       return '';
     }
@@ -53,12 +57,12 @@ export default class Queue {
   }
 }
 
-function hotPotato(elementsList, num) {
-  const queue = new Queue();
+function hotPotato<T>(elementsList: T[], num: number): { eliminated: T[]; winner: T } {
+  const queue = new Queue<T>();
   const eliminatedList = [];
 
   for (let i = 0; i < eliminatedList.length; i++) {
-    queue.enqueue(eliminatedList[i]);
+    queue.enqueue(elementsList[i]);
   }
 
   while (queue.size() > 1) {

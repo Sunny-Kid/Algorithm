@@ -1,32 +1,17 @@
 import { defaultToString } from '../util';
-import { LinkedList } from '../LinkedList';
+import LinkedList from '../LinkedList';
+import { ValuePair } from '../models/value-pair';
 
-// 解决哈希冲突的三种方法（拉链法、开放地址法、再散列法）
-class ValuePair {
-  constructor(key, value) {
-    this.key = key;
-    this.value = value;
-  }
+type ITable<K, V> = { [key: string]: LinkedList<ValuePair<K, V>> };
 
-  toString() {
-    return `[#${this.key}: ${this.value}]`;
-  }
-}
+export default class HashTableSeparateChaining<K, V> {
+  protected table: ITable<K, V>;
 
-class HashTableSeparateChaining {
-  constructor(toStrFn = defaultToString) {
-    this.toStrFn = toStrFn;
-    this.table = {};
-  }
-}
-
-export default class HashMap {
-  constructor(toStrFn = defaultToString) {
-    this.toStrFn = toStrFn;
+  constructor(protected toStrFn: (key: K) => string = defaultToString) {
     this.table = {};
   }
 
-  loseloseHashCode(key) {
+  private loseloseHashCode(key: K): number {
     if (typeof key === 'number') {
       return key;
     }
@@ -38,15 +23,16 @@ export default class HashMap {
     return hash % 37;
   }
 
-  hashCode(key) {
+  hashCode(key: K): number {
     return this.loseloseHashCode(key);
   }
 
-  put(key, value) {
+  put(key: K, value: V): boolean {
     if (key != null && value != null) {
       const position = this.hashCode(key);
+
       if (this.table[position] == null) {
-        this.table[position] = new LinkedList();
+        this.table[position] = new LinkedList<ValuePair<K, V>>();
       }
       this.table[position].push(new ValuePair(key, value));
       return true;
@@ -54,7 +40,7 @@ export default class HashMap {
     return false;
   }
 
-  get(key) {
+  get(key: K): V | undefined {
     const position = this.hashCode(key);
     const linkedList = this.table[position];
     if (linkedList != null && !linkedList.isEmpty()) {
@@ -69,7 +55,7 @@ export default class HashMap {
     return undefined;
   }
 
-  remove(key) {
+  remove(key: K): boolean {
     const position = this.hashCode(key);
     const linkedList = this.table[position];
     if (linkedList != null && !linkedList.isEmpty()) {
@@ -86,5 +72,35 @@ export default class HashMap {
       }
     }
     return false;
+  }
+
+  isEmpty(): boolean {
+    return this.size() === 0;
+  }
+
+  size(): number {
+    let count = 0;
+    Object.values(this.table).forEach(linkedList => (count += linkedList.size()));
+    return count;
+  }
+
+  clear(): void {
+    this.table = {};
+  }
+
+  getTable(): ITable<K, V> {
+    return this.table;
+  }
+
+  toString(): string {
+    if (this.isEmpty()) {
+      return '';
+    }
+    const keys = Object.keys(this.table);
+    let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;
+    for (let i = 1; i < keys.length; i++) {
+      objString = `${objString},{${keys[i]} => ${this.table[keys[i]].toString()}}`;
+    }
+    return objString;
   }
 }

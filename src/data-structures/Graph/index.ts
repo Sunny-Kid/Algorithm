@@ -1,35 +1,21 @@
 import Dictionary from '../Dictionary';
-import Queue from '../Queue';
 
-const Colors = {
-  WHITE: 0,
-  GREY: 1,
-  BLACK: 2,
-};
-
-const initializeColor = vertices => {
-  const color = {};
-  for (let i = 0; i < vertices.length; i++) {
-    color[vertices[i]] = Colors.WHITE;
-  }
-  return color;
-};
+type IAdjList = Dictionary<string | number, (string | number)[]>;
 
 export default class Graph {
-  constructor(isDirected = false) {
-    this.isDirected = isDirected;
-    this.vertices = [];
-    this.adjList = new Dictionary();
-  }
+  private vertices: (string | number)[];
+  private adjList: IAdjList;
 
-  addVertex(v) {
+  constructor(private isDirected = false) {}
+
+  addVertex(v: string | number): void {
     if (!this.vertices.includes(v)) {
       this.vertices.push(v);
       this.adjList.set(v, []); // initialize adjacency list with array as well;
     }
   }
 
-  addEdge(a, b) {
+  addEdge(a: string | number, b: string | number): void {
     if (!this.adjList.get(a)) {
       this.addVertex(a);
     }
@@ -42,21 +28,21 @@ export default class Graph {
     }
   }
 
-  getVertices() {
+  getVertices(): (string | number)[] {
     return this.vertices;
   }
 
-  getAdjList() {
+  getAdjList(): IAdjList {
     return this.adjList;
   }
 
-  toString() {
+  toString(): string {
     let s = '';
     for (let i = 0; i < this.vertices.length; i++) {
-      s += `${this.vertices[i]} -> `;
+      s += this.vertices[i] + ' -> ';
       const neighbors = this.adjList.get(this.vertices[i]);
       for (let j = 0; j < neighbors.length; j++) {
-        s += `${neighbors[j]} `;
+        s += neighbors[j] + ' ';
       }
       s += '\n';
     }

@@ -1,43 +1,42 @@
-import { Compare, defaultCompare, reverseCompare, swap } from '../util';
+import { Compare, defaultCompare, ICompareFunction, reverseCompare, swap } from '../util';
 
-export default class MinHeap {
-  constructor(compareFn = defaultCompare) {
-    this.compareFn = compareFn;
-    this.heap = [];
-  }
+export default class MinHeap<T> {
+  protected heap: T[];
 
-  getLeftIndex(index) {
+  constructor(protected compareFn: ICompareFunction<T> = defaultCompare) {}
+
+  private getLeftIndex(index: number): number {
     return 2 * index + 1;
   }
 
-  getRightIndex(index) {
+  private getRightIndex(index: number): number {
     return 2 * index + 2;
   }
 
-  getParentIndex(index) {
+  private getParentIndex(index: number): number {
     if (index === 0) {
       return undefined;
     }
     return Math.floor((index - 1) / 2);
   }
 
-  size() {
+  size(): number {
     return this.heap.length;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() <= 0;
   }
 
-  clear() {
+  clear(): void {
     this.heap = [];
   }
 
-  findMinimum() {
+  findMinimum(): T | undefined {
     return this.isEmpty() ? undefined : this.heap[0];
   }
 
-  insert(value) {
+  insert(value: T): boolean {
     if (value != null) {
       const index = this.heap.length;
       this.heap.push(value);
@@ -47,7 +46,7 @@ export default class MinHeap {
     return false;
   }
 
-  siftDown(index) {
+  private siftDown(index: number): void {
     let element = index;
     const left = this.getLeftIndex(index);
     const right = this.getRightIndex(index);
@@ -70,7 +69,7 @@ export default class MinHeap {
     }
   }
 
-  siftUp(index) {
+  private siftUp(index: number): void {
     let parent = this.getParentIndex(index);
     while (
       index > 0 &&
@@ -82,7 +81,7 @@ export default class MinHeap {
     }
   }
 
-  extract() {
+  extract(): T {
     if (this.isEmpty()) {
       return undefined;
     }
@@ -95,7 +94,7 @@ export default class MinHeap {
     return removedValue;
   }
 
-  heapify(array) {
+  heapify(array: T[]): T[] {
     if (array) {
       this.heap = array;
     }
@@ -106,31 +105,55 @@ export default class MinHeap {
     return this.heap;
   }
 
-  getAsArray() {
+  getAsArray(): T[] {
     return this.heap;
   }
 }
-export class MaxHeap extends MinHeap {
-  constructor(compareFn = defaultCompare) {
+
+export class MaxHeap<T> extends MinHeap<T> {
+  constructor(protected compareFn = defaultCompare) {
     super(compareFn);
-    this.compareFn = compareFn;
     this.compareFn = reverseCompare(compareFn);
   }
 }
 
-function heapSort(array, compareFn = defaultCompare) {
+function heapify<T>(
+  array: T[],
+  index: number,
+  heapSize: number,
+  compareFn: ICompareFunction<T>
+): void {
+  let largest = index;
+  const left = 2 * index + 1;
+  const right = 2 * index + 2;
+
+  if (left < heapSize && compareFn(array[left], array[index]) > 0) {
+    largest = left;
+  }
+
+  if (right < heapSize && compareFn(array[right], array[largest]) > 0) {
+    largest = right;
+  }
+
+  if (largest !== index) {
+    swap(array, index, largest);
+    heapify(array, largest, heapSize, compareFn);
+  }
+}
+
+function buildMaxHeap<T>(array: T[], compareFn: ICompareFunction<T> = defaultCompare): T[] {
+  for (let i = Math.floor(array.length / 2); i >= 0; i -= 1) {
+    heapify(array, i, array.length, compareFn);
+  }
+  return array;
+}
+
+function heapSort<T>(array: T[], compareFn: ICompareFunction<T> = defaultCompare): T[] {
   let heapSize = array.length;
   buildMaxHeap(array, compareFn); // step 1
   while (heapSize > 1) {
     swap(array, 0, --heapSize); // step 2
     heapify(array, 0, heapSize, compareFn); // step 3
-  }
-  return array;
-}
-
-function buildMaxHeap(array, compareFn) {
-  for (let i = Math.floor(array.length / 2); i >= 0; i -= 1) {
-    heapify(array, i, array.length, compareFn);
   }
   return array;
 }

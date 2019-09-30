@@ -1,23 +1,16 @@
 import { defaultToString } from '../util';
+import { ValuePair } from '../models/value-pair';
 
-class ValuePair {
-  constructor(key, value) {
-    this.key = key;
-    this.value = value;
-  }
+type ITable<K, V> = { [key: string]: ValuePair<K, V> };
 
-  toString() {
-    return `[#${this.key}: ${this.value}]`;
-  }
-}
+export default class HashTableLinearProbing<K, V> {
+  protected table: ITable<K, V>;
 
-export default class HashMap {
-  constructor(toStrFn = defaultToString) {
-    this.toStrFn = toStrFn;
+  constructor(protected toStrFn: (key: K) => string = defaultToString) {
     this.table = {};
   }
 
-  loseloseHashCode(key) {
+  private loseloseHashCode(key: K): number {
     if (typeof key === 'number') {
       return key;
     }
@@ -29,38 +22,31 @@ export default class HashMap {
     return hash % 37;
   }
 
-  djb2HashCode(key) {
-    const tableKey = this.toStrFn(key);
-    let hash = 5381;
-    for (let i = 0; i < tableKey.length; i++) {
-      hash = hash * 33 + tableKey.charCodeAt(i);
-    }
-    return hash % 1013;
-  }
-
-  hashCode(key) {
+  hashCode(key: K): number {
     return this.loseloseHashCode(key);
   }
 
-  put(key, value) {
+  put(key: K, value: V): boolean {
     if (key != null && value != null) {
       const position = this.hashCode(key);
+
       if (this.table[position] == null) {
-        this.table[position] = new ValuePair(key, pair);
-        return true;
+        this.table[position] = new ValuePair(key, value);
       } else {
         let index = position + 1;
         while (this.table[index] != null) {
           index++;
         }
-        this.table[index] = new ValuePair(key, pair);
+        this.table[index] = new ValuePair(key, value);
       }
+      return true;
     }
     return false;
   }
 
-  get(key) {
+  get(key: K): V | undefined {
     const position = this.hashCode(key);
+
     if (this.table[position] != null) {
       if (this.table[position].key === key) {
         return this.table[position].value;
@@ -76,8 +62,9 @@ export default class HashMap {
     return undefined;
   }
 
-  remove(key) {
+  remove(key: K): boolean {
     const position = this.hashCode(key);
+
     if (this.table[position] != null) {
       if (this.table[position].key === key) {
         delete this.table[position];
@@ -97,7 +84,7 @@ export default class HashMap {
     return false;
   }
 
-  verifyRemoveSideEffect(key, removedPosition) {
+  private verifyRemoveSideEffect(key: K, removedPosition: number): void {
     const hash = this.hashCode(key);
     let index = removedPosition + 1;
     while (this.table[index] != null) {
@@ -109,5 +96,33 @@ export default class HashMap {
       }
       index++;
     }
+  }
+
+  isEmpty(): boolean {
+    return this.size() === 0;
+  }
+
+  size(): number {
+    return Object.keys(this.table).length;
+  }
+
+  clear(): void {
+    this.table = {};
+  }
+
+  getTable(): ITable<K, V> {
+    return this.table;
+  }
+
+  toString(): string {
+    if (this.isEmpty()) {
+      return '';
+    }
+    const keys = Object.keys(this.table);
+    let objString = `{${keys[0]} => ${this.table[keys[0]].toString()}}`;
+    for (let i = 1; i < keys.length; i++) {
+      objString = `${objString},{${keys[i]} => ${this.table[keys[i]].toString()}}`;
+    }
+    return objString;
   }
 }

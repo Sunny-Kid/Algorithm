@@ -1,9 +1,11 @@
-export default class Set {
+export default class Set<T> {
+  private items: any;
+
   constructor() {
     this.items = {};
   }
 
-  add(element) {
+  add(element: T): boolean {
     if (!this.has(element)) {
       this.items[element] = element;
       return true;
@@ -11,7 +13,7 @@ export default class Set {
     return false;
   }
 
-  delete(element) {
+  delete(element: T): boolean {
     if (this.has(element)) {
       delete this.items[element];
       return true;
@@ -19,23 +21,23 @@ export default class Set {
     return false;
   }
 
-  has(element) {
+  has(element: T): boolean {
     return Object.prototype.hasOwnProperty.call(this.items, element);
   }
 
-  values() {
+  values(): T[] {
     return Object.values(this.items);
   }
 
-  union(otherSet) {
-    const unionSet = new Set();
+  union(otherSet: Set<T>): Set<T> {
+    const unionSet = new Set<T>();
     this.values().forEach(value => unionSet.add(value));
     otherSet.values().forEach(value => unionSet.add(value));
     return unionSet;
   }
 
-  intersection(otherSet) {
-    const intersectionSet = new Set();
+  intersection(otherSet: Set<T>): Set<T> {
+    const intersectionSet = new Set<T>();
     const values = this.values();
     const otherValues = otherSet.values();
     let biggerSet = values;
@@ -52,8 +54,8 @@ export default class Set {
     return intersectionSet;
   }
 
-  difference(otherSet) {
-    const differenceSet = new Set();
+  difference(otherSet: Set<T>): Set<T> {
+    const differenceSet = new Set<T>();
     this.values().forEach(value => {
       if (!otherSet.has(value)) {
         differenceSet.add(value);
@@ -62,7 +64,7 @@ export default class Set {
     return differenceSet;
   }
 
-  isSubsetOf(otherSet) {
+  isSubsetOf(otherSet: Set<T>): boolean {
     if (this.size() > otherSet.size()) {
       return false;
     }
@@ -77,19 +79,23 @@ export default class Set {
     return isSubset;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
-  size() {
+  size(): number {
     return Object.keys(this.items).length;
   }
 
-  clear() {
+  getItems(): any {
+    return this.items;
+  }
+
+  clear(): void {
     this.items = {};
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) {
       return '';
     }

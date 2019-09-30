@@ -1,19 +1,16 @@
-import LinkedList, { Node } from '../LinkedList';
+import { defaultEquals, IEqualFunction } from '../util';
+import LinkedList from '../LinkedList';
+import { DoublyNode } from '../models/linked-list-models';
 
-export class DoublyNode extends Node {
-  constructor(element, next, prev) {
-    super(element, next);
-    this.prev = prev;
-  }
-}
+export default class DoublyLinkedList<T> extends LinkedList<T> {
+  protected head: DoublyNode<T> | undefined;
+  protected tail: DoublyNode<T> | undefined;
 
-export default class DoublyLinkedList extends LinkedList {
-  constructor(equalsFn = defaultEquals) {
+  constructor(equalsFn: IEqualFunction<T> = defaultEquals) {
     super(equalsFn);
-    this.tail = undefined;
   }
 
-  push(element) {
+  push(element: T): void {
     const node = new DoublyNode(element);
     if (this.head == null) {
       this.head = node;
@@ -27,7 +24,7 @@ export default class DoublyLinkedList extends LinkedList {
     this.count++;
   }
 
-  insert(element, index) {
+  insert(element: T, index: number): boolean {
     if (index >= 0 && index <= this.count) {
       const node = new DoublyNode(element);
       let current = this.head;
@@ -61,7 +58,7 @@ export default class DoublyLinkedList extends LinkedList {
     return false;
   }
 
-  removeAt(index) {
+  removeAt(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
       let current = this.head;
       if (index === 0) {
@@ -91,7 +88,7 @@ export default class DoublyLinkedList extends LinkedList {
     return undefined;
   }
 
-  indexOf(element) {
+  indexOf(element: T): number {
     let current = this.head;
     let index = 0;
     while (current != null) {
@@ -104,20 +101,20 @@ export default class DoublyLinkedList extends LinkedList {
     return -1;
   }
 
-  getHead() {
+  getHead(): DoublyNode<T> {
     return this.head;
   }
 
-  getTail() {
+  getTail(): DoublyNode<T> {
     return this.tail;
   }
 
-  clear() {
+  clear(): void {
     super.clear();
     this.tail = undefined;
   }
 
-  toString() {
+  toString(): string {
     if (this.head == null) {
       return '';
     }
@@ -130,7 +127,7 @@ export default class DoublyLinkedList extends LinkedList {
     return objString;
   }
 
-  inverseToString() {
+  inverseToString(): string {
     if (this.tail == null) {
       return '';
     }

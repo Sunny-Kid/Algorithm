@@ -1,20 +1,13 @@
-import { defaultEquals } from '../util';
+import { Node } from '../models/linked-list-models';
+import { defaultEquals, IEqualFunction } from '../util';
 
-export class Node {
-  constructor(element) {
-    this.element = element;
-    this.next = null;
-  }
-}
+export default class LinkedList<T> {
+  protected count: number;
+  protected head: Node<T> | undefined;
 
-export default class LinkedList {
-  constructor(equalsFn = defaultEquals) {
-    this.equalsFn = equalsFn;
-    this.count = 0;
-    this.head = undefined;
-  }
+  constructor(protected equalsFn: IEqualFunction<T> = defaultEquals) {}
 
-  push(element) {
+  push(element: T): void {
     const node = new Node(element);
     let current;
     if (this.head == null) {
@@ -30,7 +23,7 @@ export default class LinkedList {
     this.count++;
   }
 
-  getElementAt(index) {
+  getElementAt(index: number): Node<T> | undefined {
     if (index >= 0 && index <= this.count) {
       let node = this.head;
       for (let i = 0; i < index && node != null; i++) {
@@ -41,7 +34,7 @@ export default class LinkedList {
     return undefined;
   }
 
-  insert(element, index) {
+  insert(element: T, index: number): boolean {
     if (index >= 0 && index <= this.count) {
       const node = new Node(element);
       if (index === 0) {
@@ -59,7 +52,7 @@ export default class LinkedList {
     return false;
   }
 
-  removeAt(index) {
+  removeAt(index: number): T | undefined {
     if (index >= 0 && index < this.count) {
       let current = this.head;
       if (index === 0) {
@@ -75,12 +68,12 @@ export default class LinkedList {
     return undefined;
   }
 
-  remove(element) {
+  remove(element: T): T | undefined {
     const index = this.indexOf(element);
     return this.removeAt(index);
   }
 
-  indexOf(element) {
+  indexOf(element: T): number {
     let current = this.head;
     for (let i = 0; i < this.size() && current != null; i++) {
       if (this.equalsFn(element, current.element)) {
@@ -91,24 +84,24 @@ export default class LinkedList {
     return -1;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
-  size() {
+  size(): number {
     return this.count;
   }
 
-  getHead() {
+  getHead(): Node<T> {
     return this.head;
   }
 
-  clear() {
+  clear(): void {
     this.head = undefined;
     this.count = 0;
   }
 
-  toString() {
+  toString(): string {
     if (this.head == null) {
       return '';
     }

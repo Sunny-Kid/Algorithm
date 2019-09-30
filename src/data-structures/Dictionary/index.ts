@@ -1,27 +1,18 @@
+import { ValuePair } from '../models/value-pair';
 import { defaultToString } from '../util';
 
-class ValuePair {
-  constructor(key, value) {
-    this.key = key;
-    this.value = value;
-  }
+class Dictionary<K, V> {
+  private table: { [key: string]: ValuePair<K, V> };
 
-  toString() {
-    return `[#${this.key}: ${this.value}]`;
-  }
-}
-
-class Dictionary {
-  constructor(toStrFn = defaultToString) {
-    this.toStrFn = toStrFn;
+  constructor(private toStrFn = defaultToString) {
     this.table = {};
   }
 
-  hasKey(key) {
+  hasKey(key: K): boolean {
     return this.table[this.toStrFn(key)] != null;
   }
 
-  set(key, value) {
+  set(key: K, value: V): boolean {
     if (key != null && value != null) {
       const tableKey = this.toStrFn(key);
       this.table[tableKey] = new ValuePair(key, value);
@@ -30,12 +21,12 @@ class Dictionary {
     return false;
   }
 
-  get(key) {
+  get(key: K): V | undefined {
     const valuePair = this.table[this.toStrFn(key)];
     return valuePair == null ? undefined : valuePair.value;
   }
 
-  remove(key) {
+  remove(key: K): boolean {
     if (this.hasKey(key)) {
       delete this.table[this.toStrFn(key)];
       return true;
@@ -43,37 +34,37 @@ class Dictionary {
     return false;
   }
 
-  keyValues() {
+  keyValues(): ValuePair<K, V>[] {
     const valuePairs = [];
     for (const k in this.table) {
-      if (this.hasKey(k)) {
+      if (this.hasKey((k as unknown) as K)) {
         valuePairs.push(this.table[k]);
       }
     }
     return valuePairs;
   }
 
-  keys() {
-    return this.keyValues().map(valuePair => valuePair.key);
+  keys(): K[] {
+    return this.keyValues().map((valuePair: ValuePair<K, V>) => valuePair.key);
   }
 
-  values() {
-    return this.keyValues().map(valuePair => valuePair.value);
+  values(): V[] {
+    return this.keyValues().map((valuePair: ValuePair<K, V>) => valuePair.value);
   }
 
-  size() {
+  size(): number {
     return Object.keys(this.table).length;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.size() === 0;
   }
 
-  clear() {
+  clear(): void {
     this.table = {};
   }
 
-  forEach(callbackFn) {
+  forEach(callbackFn: (key: K, value: V) => any): void {
     const valuePairs = this.keyValues();
     for (let i = 0; i < valuePairs.length; i++) {
       const result = callbackFn(valuePairs[i].key, valuePairs[i].value);
@@ -83,7 +74,7 @@ class Dictionary {
     }
   }
 
-  toString() {
+  toString(): string {
     if (this.isEmpty()) {
       return '';
     }
