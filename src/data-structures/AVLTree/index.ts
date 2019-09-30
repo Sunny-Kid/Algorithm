@@ -16,7 +16,7 @@ export default class AVLTree<T> extends BinarySearchTree<T> {
   }
 
   private getNodeHeight(node: Node<T>): number {
-    if (node === null) {
+    if (node == null) {
       return -1;
     }
     return Math.max(this.getNodeHeight(node.left), this.getNodeHeight(node.right)) + 1;

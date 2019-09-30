@@ -8,11 +8,11 @@ describe('AVLTree', () => {
   });
 
   it('starts empty', () => {
-    expect(tree.getRoot()).toBeNull();
+    expect(tree.getRoot()).toBeUndefined();
   });
 
   it('inserts elements in the AVLTree', () => {
-    expect(tree.getRoot()).toBeNull();
+    expect(tree.getRoot()).toBeUndefined();
 
     tree.insert(1);
     tree.insert(2);
