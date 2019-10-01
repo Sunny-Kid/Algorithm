@@ -6,7 +6,7 @@
 import { swap } from './utils';
 
 // 最大堆调整（Max Heapify）：将堆的末端子节点作调整，使得子节点永远小于父节点
-function maxHeapify(arr, start, end) {
+function maxHeapify(arr: number[], start: number, end: number): void {
   //建立父节点指标和子节点指标
   let dad = start;
   let son = dad * 2 + 1;
@@ -24,7 +24,7 @@ function maxHeapify(arr, start, end) {
 }
 
 // 堆排序
-function heapSort(arr) {
+function heapSort(arr: number[]): void {
   // 初始化大顶堆，i 从第一个非叶子结点开始
   for (let i = Math.floor(arr.length / 2 - 1); i >= 0; i--) {
     maxHeapify(arr, i, arr.length - 1);
@@ -36,5 +36,5 @@ function heapSort(arr) {
   }
 }
 
-let arr = [4, 6, 8, 5, 9, 1, 2, 5, 3, 2];
+const arr = [4, 6, 8, 5, 9, 1, 2, 5, 3, 2];
 heapSort(arr);

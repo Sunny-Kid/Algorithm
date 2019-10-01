@@ -6,7 +6,7 @@
 
 import { findMaxValue } from './utils';
 
-export default function countingSort(arr) {
+export default function countingSort(arr: number[]): number[] {
   if (!Array.isArray(arr) || arr.length < 2) return arr;
   // 创建长度max的数组，填充0
   const maxValue = findMaxValue(arr);
@@ -24,5 +24,5 @@ export default function countingSort(arr) {
   return arr;
 }
 
-let arr = [2, 2, 3, 8, 7, 1, 2, 2, 2, 7, 3, 9, 8, 2, 1, 4, 2, 4, 6, 9, 2];
+const arr = [2, 2, 3, 8, 7, 1, 2, 2, 2, 7, 3, 9, 8, 2, 1, 4, 2, 4, 6, 9, 2];
 console.log(countingSort(arr)); //[1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 6, 7, 7, 8, 8, 9, 9]

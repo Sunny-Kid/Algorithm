@@ -3,11 +3,11 @@
  * @param {Array} arr
  * O(n^2)
  */
-export default function insertionSort(arr) {
-  let key;
+export default function insertionSort(arr: number[]): number[] {
+  let key: number;
   for (let i = 1; i < arr.length; i++) {
-    key = arr[i];
-    for (let j = i; j >= 0; j--) {
+    let j: number;
+    for (j = i; j >= 0; j--) {
       if (arr[j] > key) {
         arr[j] = arr[j - 1];
       }

@@ -5,16 +5,7 @@
  * @param {Array} arr
  * @return {Array}
  */
-export default function mergeSort(array) {
-  const { length } = array;
-  if (length < 2) return array;
-  const middle = Math.floor(length / 2);
-  const left = mergeSort(array.slice(0, middle));
-  const right = mergeSort(array.slice(middle, length));
-  return merge(left, right);
-}
-
-function merge(left, right) {
+function merge<T>(left: T[], right: T[]): T[] {
   let i = 0;
   let j = 0;
   const result = [];
@@ -22,4 +13,13 @@ function merge(left, right) {
     result.push(left[i] < right[j] ? left[i++] : right[j++]);
   }
   return result.concat(i < left.length ? left.slice(i) : right.slice(j));
+}
+
+export default function mergeSort<T>(array: T[]): T[] {
+  const { length } = array;
+  if (length < 2) return array;
+  const middle = Math.floor(length / 2);
+  const left = mergeSort(array.slice(0, middle));
+  const right = mergeSort(array.slice(middle, length));
+  return merge(left, right);
 }

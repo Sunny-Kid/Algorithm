@@ -8,7 +8,7 @@
 import insertionSort from './insertionSort';
 import { findMaxValue, findMinValue } from './utils';
 
-function createBuckets(array, bucketSize) {
+function createBuckets(array: number[], bucketSize: number): number[] {
   const minValue = findMinValue(array);
   const maxValue = findMaxValue(array);
   const bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
@@ -17,13 +17,13 @@ function createBuckets(array, bucketSize) {
     buckets[i] = [];
   }
   for (let i = 0; i < array.length; i++) {
-    const bucketIndex = Math.floor((array[i] - min) / bucketCount);
+    const bucketIndex = Math.floor((array[i] - minValue) / bucketCount);
     buckets[bucketIndex].push(array[i]);
   }
   return buckets;
 }
 
-function sortBuckets() {
+function sortBuckets(buckets): number[] {
   const sortedArray = [];
   for (let i = 0; i < buckets.length; i++) {
     if (buckets[i] !== null) {
@@ -34,11 +34,11 @@ function sortBuckets() {
   return sortedArray;
 }
 
-export default function bucketSort(array, bucketSize = 5) {
+export default function bucketSort(array: number[], bucketSize = 5): number[] {
   if (!Array.isArray(array) || array.length <= 1) return array;
   const buckets = createBuckets(array, bucketSize);
   return sortBuckets(buckets);
 }
 
-var arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
+const arr = [3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48];
 console.log(bucketSort(arr, 4)); //[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]

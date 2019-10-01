@@ -5,7 +5,7 @@
  */
 import { swap } from './utils';
 
-export default function selectionSort(arr) {
+export default function selectionSort(arr: number[]): number[] {
   let indexMin;
   for (let i = 0; i < arr.length - 1; i++) {
     indexMin = i;
