@@ -3,8 +3,8 @@
  * @param {Object} item
  * O(logn)
  */
-function binarySearch(item, arr) {
-  arr.sort((a, b) => a - b);
+export default function binarySearch(item: number, arr: number[]): number {
+  arr.sort((a: number, b: number) => a - b);
   let low = 0;
   let high = arr.length - 1;
   while (low <= high) {

@@ -4,7 +4,7 @@
  * @param {Objec} item
  * O(n)
  */
-function sequentialSearch(arr, item) {
+export default function sequentialSearch(arr: number[], item: number): number {
   for (let i = 0; i < arr.length; i++) {
     if (item === arr[i]) return i;
   }
