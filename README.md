@@ -6,7 +6,7 @@
 ![][dt-url]
 ![][license-url]
 
-## Project Structures
+## Project Structure
 
 `src/index.js` file contains all the data structures
 
