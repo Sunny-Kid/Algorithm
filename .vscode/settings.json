@@ -41,5 +41,8 @@
   "files.associations": {
     "*.ttml": "xml",
     "*.ttss": "css"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
   }
 }
