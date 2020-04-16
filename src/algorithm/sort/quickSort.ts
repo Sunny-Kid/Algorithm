@@ -28,14 +28,11 @@ function partition(array: number[], left: number, right: number): number {
 }
 
 function quick(arr: number[], left: number, right: number): number[] {
-  let index;
   if (arr.length > 1) {
-    index = partition(arr, left, right);
-    if (left < index - 1) {
+    if (right > left) {
+      const index = partition(arr, left, right);
       quick(arr, left, index - 1);
-    }
-    if (index < right) {
-      quick(arr, index, right);
+      quick(arr, index + 1, right);
     }
   }
   return arr;
