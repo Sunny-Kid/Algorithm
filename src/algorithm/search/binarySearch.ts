@@ -13,13 +13,14 @@ export default function binarySearch(item: number, arr: number[]): number {
      * 因为如果 low 和 high 比较大的话，两者之和就有可能会溢出
      * 改进的方法是将 mid 的计算方式写成 low+(high-low)/2
      */
-    const mid = low + Math.floor((high - low) / 2);
+    const mid = Math.floor(low + (high - low) / 2);
     if (arr[mid] < item) {
       low = mid + 1;
     } else if (arr[mid] > item) {
       high = mid - 1;
     } else {
-      return mid;
+      if (mid === 0 || arr[mid - 1] !== item) return mid;
+      high = mid - 1;
     }
   }
 
